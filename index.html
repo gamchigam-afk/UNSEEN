@@ -74,23 +74,27 @@ main{padding:22px 15px}
 <div class="muted" style="margin-top:25px">CASE FILE</div>
 <h1>CASE 01</h1>
 <div class="muted">STATUS : UNSOLVED</div>
+
 <div class="panel" style="margin:30px 0">
 사건 번호 : 01<br>
 사건 발생일 : 1998. 11. 17<br>
 사건 장소 : 열차 7호차<br>
 사건 분류 : 실종
 </div>
+
 <button class="btn" onclick="overview()">사건 조사 시작</button>
 </div>
 </div>
 
 <div id="app" class="hidden">
+
 <header class="top">
 <div class="logo">SEARCH N GUESS</div>
 <div class="muted">CASE 01 // UNSOLVED</div>
 </header>
 
 <div class="layout">
+
 <aside>
 <button id="mOverview" class="menu" onclick="overview()">📁 사건 개요</button>
 <button id="mPeople" class="menu" onclick="people()">👤 인물</button>
@@ -100,11 +104,13 @@ main{padding:22px 15px}
 </aside>
 
 <main id="main"></main>
+
 </div>
 </div>
 
 <div id="cut" class="cut hidden">
 <div class="cutin">
+
 <div id="cutText" class="cuttext"></div>
 
 <div id="reveal" class="reveal">
@@ -113,35 +119,60 @@ main{padding:22px 15px}
 <h3 id="revealTitle"></h3>
 <button class="btn" onclick="closeCut()">확인</button>
 </div>
+
 </div>
 </div>
 
 <script>
 
 const E={
+
 1:["알렉스의 승차권","좌석 구역","좌석 옆에서 승차권 한 장이 발견되었다.","알렉스 모건 명의의 승차권이다. 탑승 날짜와 목적지가 기록되어 있다.","알렉스가 해당 열차에 탑승했다는 사실."],
+
 2:["알렉스의 검은 가방","좌석 구역","의자 아래에 작은 검은 가방이 보인다.","개인 물품 몇 가지가 들어 있는 검은색 소형 가방이다.","가방이 좌석 아래에 남아 있었다는 점."],
+
 3:["찢어진 메모","좌석 구역","좌석 틈 사이에서 종이 조각 하나가 보인다.","일부만 남은 종이. 짧은 문장과 숫자로 보이는 흔적이 있다.","내용만으로는 의미를 확정하기 어렵다."],
+
 4:["멈춰 있는 손목시계","좌석 구역","좌석 아래에서 손목시계 하나가 발견되었다.","시계는 23시 17분을 가리킨 채 멈춰 있다.","23시 17분이라는 특정 시간."],
+
 5:["좌석 밑 영수증","좌석 구역","좌석 밑에서 접힌 영수증이 발견되었다.","열차 안에서 구매한 것으로 보이는 영수증. 발급 시간이 적혀 있다.","사건 전후의 시간대."],
+
 6:["승객 B의 승차권","좌석 구역","좌석 틈에서 다른 사람의 승차권이 발견되었다.","B 명의의 승차권. 알렉스와 가까운 좌석 번호가 적혀 있다.","B가 알렉스와 가까운 위치에 있었다는 사실."],
+
 7:["승객 B의 손수건","좌석 구역","알렉스의 좌석 근처에서 손수건 하나가 발견되었다.","작은 이니셜이 새겨져 있다. B의 물건과 비슷해 보인다.","B의 물건일 가능성. 이것만으로 소유자를 확정할 수 없다."],
+
 8:["빈 음료수 캔","좌석 구역","테이블 아래에서 빈 음료수 캔이 발견되었다.","구매 시간은 확인되지만 누가 마셨는지는 알 수 없다.","사건 전후 누군가 좌석 주변에 있었을 가능성."],
+
 9:["객차 시간표","출입문","출입문 옆에 붙은 시간표가 눈에 들어온다.","7호차가 각 역을 통과하는 시간이 표시되어 있다.","다른 시간 관련 증거와 비교할 수 있다."],
+
 10:["출입문 상태 기록","출입문","출입문 옆 기록 장치에 남은 자료가 발견되었다.","특정 시간대에 출입문이 열리고 닫힌 기록이다.","누군가 객차를 이동했을 가능성."],
+
 11:["열차 안내 방송 기록","출입문","안내 방송 장치에 이전 방송 기록이 남아 있다.","사건 당시 방송 내용과 방송 시각이 기록되어 있다.","목격자의 시간 진술을 검증할 수 있다."],
+
 12:["바닥의 작은 흠집","출입문","출입문 주변 바닥에 작은 흠집이 보인다.","길게 긁힌 흔적이 남아 있다.","물건이 이동했을 가능성."],
+
 13:["버려진 장갑","화장실","화장실 구석에서 장갑 한 짝이 발견되었다.","검은색 장갑 한 짝. 특정 인물의 것이라고 단정할 표시는 없다.","화장실에 누군가 있었음을 보여주는 단서."],
+
 14:["세면대의 물기","화장실","세면대에 아직 마르지 않은 물기가 남아 있다.","최근 사용된 것으로 보인다.","사건 직전 화장실이 사용되었을 가능성."],
+
 15:["휴지통 속 종이조각","화장실","휴지통 안에서 찢어진 종이 조각들이 보인다.","여러 크기로 찢긴 종이 조각들이다.","좌석의 메모와 비교할 필요가 있다."],
+
 16:["이름 없는 열쇠","화장실","세면대 아래에서 작은 열쇠 하나가 발견되었다.","이름이나 번호가 표시되어 있지 않다.","7호차 어딘가와 관련 있는지 확인할 필요."],
+
 17:["낡은 여행가방","짐칸","짐칸 구석에 오래된 여행가방 하나가 놓여 있다.","잠겨 있지 않은 오래된 여행가방이다.","사건과 직접 관련 있는지는 알 수 없다."],
+
 18:["수하물 태그","짐칸","여행가방에 붙어 있던 수하물 태그가 보인다.","이름과 수하물 번호가 기록되어 있다.","짐의 소유자와 이동 경로."],
+
 19:["알렉스의 작은 사진","짐칸","여행가방 안쪽에서 작은 사진 한 장이 발견되었다.","알렉스가 찍힌 사진. 다른 부분은 흐릿하다.","사진 속 인물과 장소에 대한 추가 조사."],
+
 20:["창문에 남은 손자국","창가","창문에 희미한 손자국이 남아 있다.","창문 안쪽에 손바닥 모양 흔적이 있다.","사건 당시 창가에 누군가 있었을 가능성."],
+
 21:["창밖 풍경 사진","창가","창가에서 작은 사진 파일 하나가 발견되었다.","열차에서 촬영된 것으로 보이는 풍경 사진이다.","촬영 시각을 다른 증거와 비교할 수 있다."],
+
 22:["객차 연결부의 발자국","객차 연결부","연결부 바닥에 희미한 발자국이 보인다.","여러 종류의 발자국이 겹쳐 있다.","사건 당시 연결부를 이용한 사람이 있었을 가능성."],
+
 23:["찢어진 옷감 조각","객차 연결부","문틈에 작은 옷감 조각이 걸려 있다.","짙은 색상의 옷감 일부다.","인물들의 옷차림과 비교할 필요."],
+
 24:["승객 B의 진술 기록","객차 연결부","사건 당시 상황에 대한 기록이 발견되었다.","B는 사건 시간대 대부분을 자신의 좌석에서 보냈다고 진술했다.","다른 시간 관련 증거와 비교할 필요."]
 };
 
@@ -162,15 +193,12 @@ role:"실종자",
 place:"7호차 좌석 구역",
 desc:"사건 당일 열차에 탑승했던 승객. 종착역 도착 직전 행방이 확인되지 않았다.",
 statement:"사건 발생 전까지 자신의 좌석에서 시간을 보냈던 것으로 추정된다.",
+last:"23시 05분경 자신의 좌석에서 마지막으로 확인되었다. 이후 객차 내부에서 알렉스의 모습은 확인되지 않았다.",
 others:[
 ["승객 A","알렉스 씨는 사건 전에 몇 번인가 자리에서 일어났던 것 같아요."],
 ["승객 C","한동안 알렉스 씨가 보이지 않았던 것 같아요."]
 ],
-qs:[
-["사건 직전 어디에 있었습니까?","기록상 마지막으로 확인된 위치는 7호차 좌석 구역이다.",0],
-["좌석에는 무엇이 남아 있었습니까?","승차권과 검은 가방 등 개인 소지품 일부가 남아 있었다.",2],
-["23시 17분은 어떤 의미가 있습니까?","그 시간에 멈춘 손목시계가 발견되었다. 왜 멈췄는지는 아직 알 수 없다.",4]
-]
+qs:[]
 },
 
 b:{
@@ -248,90 +276,159 @@ qs:[
 };
 
 let currentPerson="";
+   function found(){
 
-function found(){
 try{
-return JSON.parse(localStorage.getItem("case01_evidence")||"[]");
+return JSON.parse(
+localStorage.getItem("case01_evidence")||"[]"
+);
 }catch{
 return[];
 }
+
 }
 
 function setFound(a){
-localStorage.setItem("case01_evidence",JSON.stringify(a));
+localStorage.setItem(
+"case01_evidence",
+JSON.stringify(a)
+);
 }
 
 function show(id){
-document.querySelectorAll(".screen").forEach(x=>x.classList.add("hidden"));
-document.getElementById("start").classList.add("hidden");
-document.getElementById("app").classList.remove("hidden");
+
+document.querySelectorAll(".screen")
+.forEach(x=>x.classList.add("hidden"));
+
+document.getElementById("start")
+.classList.add("hidden");
+
+document.getElementById("app")
+.classList.remove("hidden");
 
 ["mOverview","mPeople","mEvidence","mTrain","mNotes"]
-.forEach(x=>document.getElementById(x).classList.remove("active"));
+.forEach(x=>
+document.getElementById(x).classList.remove("active")
+);
 
 document.getElementById(id).classList.add("active");
 }
 
 function overview(){
+
 show("mOverview");
 
 main.innerHTML=`
+
 <h2>사건 개요</h2>
-<div class="subtitle">CASE 01 — 마지막 객차</div>
+
+<div class="subtitle">
+CASE 01 — 마지막 객차
+</div>
 
 <div class="panel goal">
-<div class="label">CURRENT OBJECTIVE</div>
+
+<div class="label">
+CURRENT OBJECTIVE
+</div>
+
 <div class="text">
 7호차를 조사하여 사건 당시의 상황을 파악하고,
 실종자의 행방에 대한 단서를 찾아라.
 </div>
+
 </div>
 
 <div class="panel text">
+
 1998년 11월 17일.<br><br>
-종착역 도착 직전, 열차 7호차에서 승객 한 명이 사라졌다.<br><br>
-개인 소지품 일부는 객차에 남아 있었지만 본인은 발견되지 않았다.<br><br>
-당시 7호차에는 여러 명의 승객과 승무원이 타고 있었다.<br><br>
+
+종착역 도착 직전,
+열차 7호차에서 승객 한 명이 사라졌다.<br><br>
+
+개인 소지품 일부는 객차에 남아 있었지만
+본인은 발견되지 않았다.<br><br>
+
+당시 7호차에는 여러 명의 승객과
+승무원이 타고 있었다.<br><br>
+
 사건은 현재까지 미해결 상태다.
+
 </div>
 
 ${progress()}
+
 `;
+
 }
 
 function progress(){
+
 let n=found().length;
 
 return `
+
 <div class="progress panel">
-<div class="label">조사 진행도</div>
-<div class="small">${n} / 24</div>
+
+<div class="label">
+조사 진행도
+</div>
+
+<div class="small">
+${n} / 24
+</div>
+
 <div class="bar">
-<div class="fill" style="width:${n/24*100}%"></div>
+<div class="fill"
+style="width:${n/24*100}%">
 </div>
 </div>
+
+</div>
+
 `;
+
 }
 
 function people(){
+
 show("mPeople");
 
 main.innerHTML=`
+
 <h2>인물</h2>
-<div class="subtitle">사건 관련 인물</div>
+
+<div class="subtitle">
+사건 관련 인물
+</div>
 
 <div class="grid">
 
 ${Object.entries(P).map(([id,p],i)=>`
-<div class="card" onclick="person('${id}')">
-<div class="small">PERSON 0${i+1}</div>
-<div class="name">${p.name}</div>
-<div class="small">${p.role}</div>
+
+<div class="card"
+onclick="person('${id}')">
+
+<div class="small">
+PERSON 0${i+1}
 </div>
+
+<div class="name">
+${p.name}
+</div>
+
+<div class="small">
+${p.role}
+</div>
+
+</div>
+
 `).join("")}
 
 </div>
+
 `;
+
 }
 
 function person(id){
@@ -339,92 +436,218 @@ function person(id){
 currentPerson=id;
 
 let p=P[id];
-let notes=getPersonNotes()[id]||"";
+
+let notes=
+getPersonNotes()[id]||"";
 
 show("mPeople");
+
+let questionArea="";
+
+if(id==="alex"){
+
+questionArea=`
+
+<div class="panel">
+
+<div class="label">
+마지막 확인 기록
+</div>
+
+<div class="text">
+${p.last}
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="label">
+심문 기록
+</div>
+
+<div class="empty">
+실종 상태인 인물입니다.<br>
+현재 직접적인 심문은 불가능합니다.
+</div>
+
+</div>
+
+`;
+
+}else{
+
+questionArea=`
+
+<div class="panel">
+
+<div class="label">
+추가 질문
+</div>
+
+<div id="questions">
+
+${p.qs.map(
+(q,i)=>questionHTML(q,id,i)
+).join("")}
+
+</div>
+
+<div id="answer"></div>
+
+</div>
+
+`;
+
+}
 
 main.innerHTML=`
 
 <div class="panel">
-<div class="small">${p.role}</div>
-<h2>${p.name}</h2>
-<div class="small">${p.place}</div>
+
+<div class="small">
+${p.role}
+</div>
+
+<h2>
+${p.name}
+</h2>
+
+<div class="small">
+${p.place}
+</div>
+
 </div>
 
 <div class="panel">
-<div class="label">기본 정보</div>
-<div class="text">${p.desc}</div>
+
+<div class="label">
+기본 정보
+</div>
+
+<div class="text">
+${p.desc}
+</div>
+
 </div>
 
 <div class="panel">
-<div class="label">본인의 진술</div>
-<div class="text">"${p.statement}"</div>
+
+<div class="label">
+관련 기록
+</div>
+
+<div class="text">
+"${p.statement}"
+</div>
+
 </div>
 
 <div class="panel">
-<div class="label">다른 인물의 증언</div>
+
+<div class="label">
+다른 인물의 증언
+</div>
 
 ${p.others.map(x=>`
+
 <p class="text">
-<b>${x[0]}</b> : "${x[1]}"
+<b>${x[0]}</b> :
+"${x[1]}"
 </p>
+
 `).join("")}
 
 </div>
 
-<div class="panel">
-<div class="label">추가 질문</div>
-
-<div id="questions">
-${p.qs.map((q,i)=>questionHTML(q,id,i)).join("")}
-</div>
-
-<div id="answer"></div>
-</div>
+${questionArea}
 
 <div class="panel">
-<div class="label">인물별 메모</div>
 
-<textarea id="pn" class="personnote"
-placeholder="${p.name}에 대한 메모...">${notes}</textarea>
-
-<div class="small">입력할 때마다 자동 저장됩니다.</div>
+<div class="label">
+인물별 메모
 </div>
 
-<button class="back" onclick="people()">← 인물 목록</button>
+<textarea
+id="pn"
+class="personnote"
+placeholder="${p.name}에 대한 메모..."
+>${notes}</textarea>
+
+<div class="small">
+입력할 때마다 자동 저장됩니다.
+</div>
+
+</div>
+
+<button class="back"
+onclick="people()">
+← 인물 목록
+</button>
+
 `;
+
 }
 
 function questionHTML(q,id,i){
 
-let ok=q[2]===0||found().includes(q[2]);
+let ok=
+q[2]===0 ||
+found().includes(q[2]);
 
 return `
-<button class="question ${ok?"":"locked"}"
-${ok?`onclick="answer('${id}',${i})"`:"disabled"}>
-${ok?q[0]:"🔒 "+q[0]+" — 관련 증거 필요"}
+
+<button
+class="question ${ok?"":"locked"}"
+${ok
+?`onclick="answer('${id}',${i})"`
+:"disabled"}>
+
+${ok
+?q[0]
+:"🔒 "+q[0]+" — 관련 증거 필요"}
+
 </button>
+
 `;
+
 }
 
 function answer(id,i){
 
 let q=P[id].qs[i];
 
-document.getElementById("answer").innerHTML=`
+document.getElementById("answer")
+.innerHTML=`
+
 <div class="answer">
-<div class="label">ANSWER</div>
-${q[1]}
+
+<div class="label">
+ANSWER
 </div>
+
+${q[1]}
+
+</div>
+
 `;
+
 }
 
 function getPersonNotes(){
 
 try{
-return JSON.parse(localStorage.getItem("case01_person_notes")||"{}");
+
+return JSON.parse(
+localStorage.getItem(
+"case01_person_notes"
+)||"{}"
+);
+
 }catch{
+
 return{};
+
 }
 
 }
@@ -433,9 +656,14 @@ function savePersonNote(){
 
 let n=getPersonNotes();
 
-n[currentPerson]=document.getElementById("pn").value;
+n[currentPerson]=
+document.getElementById("pn").value;
 
-localStorage.setItem("case01_person_notes",JSON.stringify(n));
+localStorage.setItem(
+"case01_person_notes",
+JSON.stringify(n)
+);
+
 }
 
 function evidence(){
@@ -445,41 +673,69 @@ show("mEvidence");
 let f=found();
 
 main.innerHTML=`
+
 <h2>증거물</h2>
-<div class="subtitle">확보한 단서를 확인할 수 있습니다.</div>
+
+<div class="subtitle">
+확보한 단서를 확인할 수 있습니다.
+</div>
 
 ${f.length
+
 ?
+
 f.sort((a,b)=>a-b).map(id=>`
+
 <div class="card evidence">
 
 <div>
-<div class="small">
-EVIDENCE ${String(id).padStart(2,"0")}
-</div>
-
-<div class="name">${E[id][0]}</div>
 
 <div class="small">
-발견 위치 : ${E[id][1]}
-</div>
+EVIDENCE
+${String(id).padStart(2,"0")}
 </div>
 
-<button class="detail" onclick="edetail(${id})">
+<div class="name">
+${E[id][0]}
+</div>
+
+<div class="small">
+발견 위치 :
+${E[id][1]}
+</div>
+
+</div>
+
+<button
+class="detail"
+onclick="edetail(${id})">
+
 상세보기 →
+
 </button>
 
 </div>
+
 `).join("")
+
 :
+
 `
+
 <div class="empty">
+
 아직 찾은 단서가 없습니다.<br>
+
 열차를 조사하여 단서를 찾으세요.
+
 </div>
+
 `
+
 }
+
 `;
+
 }
 
 function edetail(id){
@@ -489,30 +745,56 @@ show("mEvidence");
 let d=E[id];
 
 main.innerHTML=`
-<div class="fakeimg">[이미지 준비중]</div>
 
-<div class="small">
-EVIDENCE ${String(id).padStart(2,"0")}
+<div class="fakeimg">
+[이미지 준비중]
 </div>
 
-<h2>${d[0]}</h2>
+<div class="small">
+EVIDENCE
+${String(id).padStart(2,"0")}
+</div>
+
+<h2>
+${d[0]}
+</h2>
 
 <div class="panel">
 
-<div class="label">발견 위치</div>
-<div class="text">${d[1]}</div>
+<div class="label">
+발견 위치
+</div>
 
-<div class="label">관찰 기록</div>
-<div class="text">${d[3]}</div>
+<div class="text">
+${d[1]}
+</div>
 
-<div class="label">확인된 단서</div>
-<div class="text">${d[4]}</div>
+<div class="label">
+관찰 기록
+</div>
+
+<div class="text">
+${d[3]}
+</div>
+
+<div class="label">
+확인된 단서
+</div>
+
+<div class="text">
+${d[4]}
+</div>
 
 </div>
 
-<button class="back" onclick="evidence()">
+<button
+class="back"
+onclick="evidence()">
+
 ← 증거물 목록
+
 </button>
+
 `;
 
 }
@@ -522,47 +804,81 @@ function train(){
 show("mTrain");
 
 let cards=[
-["seat","💺","좌석 구역","승객들이 이용하던 좌석과 테이블"],
-["door","🚪","출입문","객차 양쪽 출입문과 주변"],
-["bath","🚻","화장실","세면대와 휴지통, 내부"],
-["luggage","🧳","짐칸","승객들의 수하물이 보관된 곳"],
-["window","🪟","창가","창문과 창가 주변"],
-["connection","🔗","객차 연결부","다른 객차로 이어지는 통로"]
+
+["seat","💺","좌석 구역",
+"승객들이 이용하던 좌석과 테이블"],
+
+["door","🚪","출입문",
+"객차 양쪽 출입문과 주변"],
+
+["bath","🚻","화장실",
+"세면대와 휴지통, 내부"],
+
+["luggage","🧳","짐칸",
+"승객들의 수하물이 보관된 곳"],
+
+["window","🪟","창가",
+"창문과 창가 주변"],
+
+["connection","🔗","객차 연결부",
+"다른 객차로 이어지는 통로"]
+
 ];
 
 main.innerHTML=`
+
 <h2>7호차</h2>
-<div class="subtitle">조사할 장소를 선택하십시오.</div>
+
+<div class="subtitle">
+조사할 장소를 선택하십시오.
+</div>
 
 <div class="grid">
 
 ${cards.map(c=>`
+
 <div class="card">
 
-<div style="font-size:24px">${c[1]}</div>
+<div style="font-size:24px">
+${c[1]}
+</div>
 
-<div class="name">${c[2]}</div>
+<div class="name">
+${c[2]}
+</div>
 
-<div class="small">${c[3]}</div>
+<div class="small">
+${c[3]}
+</div>
 
-<button class="detail"
+<button
+class="detail"
 style="margin-top:16px"
 onclick="investigate('${c[0]}')">
+
 조사
+
 </button>
 
 </div>
+
 `).join("")}
 
 </div>
+
 `;
+
 }
-   function investigate(l){
+
+function investigate(l){
 
 let a=loc[l];
+
 let f=found();
 
-let id=a.find(x=>!f.includes(x));
+let id=a.find(
+x=>!f.includes(x)
+);
 
 if(!id){
 
@@ -577,26 +893,35 @@ return;
 let d=E[id];
 
 cutOpen(d[2],id);
+
 }
 
 function cutOpen(text,id){
 
-document.getElementById("cut").classList.remove("hidden");
+document.getElementById("cut")
+.classList.remove("hidden");
 
-document.getElementById("cutText").style.display="grid";
-document.getElementById("cutText").textContent=text;
+document.getElementById("cutText")
+.style.display="grid";
 
-document.getElementById("reveal").style.display="none";
+document.getElementById("cutText")
+.textContent=text;
+
+document.getElementById("reveal")
+.style.display="none";
 
 if(id){
 
 setTimeout(()=>{
 
-document.getElementById("cutText").style.display="none";
+document.getElementById("cutText")
+.style.display="none";
 
-document.getElementById("reveal").style.display="block";
+document.getElementById("reveal")
+.style.display="block";
 
-document.getElementById("revealTitle").textContent=
+document.getElementById("revealTitle")
+.textContent=
 `증거물 ${String(id).padStart(2,"0")} — ${E[id][0]}`;
 
 let f=found();
@@ -611,7 +936,10 @@ setFound(f);
 
 }else{
 
-setTimeout(closeCut,1500);
+setTimeout(
+closeCut,
+1500
+);
 
 }
 
@@ -619,11 +947,14 @@ setTimeout(closeCut,1500);
 
 function closeCut(){
 
-document.getElementById("cut").classList.add("hidden");
+document.getElementById("cut")
+.classList.add("hidden");
 
-document.getElementById("reveal").style.display="none";
+document.getElementById("reveal")
+.style.display="none";
 
-document.getElementById("cutText").style.display="grid";
+document.getElementById("cutText")
+.style.display="grid";
 
 updateCurrent();
 
@@ -632,20 +963,35 @@ updateCurrent();
 function updateCurrent(){
 
 let id=
-document.getElementById("mEvidence").classList.contains("active")
+
+document.getElementById("mEvidence")
+.classList.contains("active")
+
 ?"evidence"
+
 :
-document.getElementById("mTrain").classList.contains("active")
+
+document.getElementById("mTrain")
+.classList.contains("active")
+
 ?"train"
+
 :
+
 "overview";
 
 if(id==="evidence"){
+
 evidence();
+
 }else if(id==="train"){
+
 train();
+
 }else{
+
 overview();
+
 }
 
 }
@@ -662,33 +1008,49 @@ main.innerHTML=`
 사건에 대한 생각을 자유롭게 기록하십시오.
 </div>
 
-<textarea id="notes"
+<textarea
+id="notes"
 class="notes"
-placeholder="여기에 자유롭게 기록하십시오...">${localStorage.getItem("case01_notes")||""}</textarea>
+placeholder="여기에 자유롭게 기록하십시오..."
+>${localStorage.getItem("case01_notes")||""}</textarea>
 
 <div class="small" id="ns">
 자동 저장됨
 </div>
 
-<button class="back" onclick="clearNotes()">
+<button
+class="back"
+onclick="clearNotes()">
+
 전체 삭제
+
 </button>
 
 <div style="text-align:right;margin-top:20px">
 
-<button class="detail" onclick="resetCase()">
+<button
+class="detail"
+onclick="resetCase()">
+
 ⚠ 사건 진행 초기화
+
 </button>
 
 </div>
+
 `;
+
 }
 
 function clearNotes(){
 
-if(confirm("추리 노트를 전부 삭제할까요?")){
+if(confirm(
+"추리 노트를 전부 삭제할까요?"
+)){
 
-localStorage.removeItem("case01_notes");
+localStorage.removeItem(
+"case01_notes"
+);
 
 notes();
 
@@ -702,9 +1064,17 @@ if(confirm(
 "획득한 증거, 추리 노트, 인물별 메모를 모두 초기화할까요?"
 )){
 
-localStorage.removeItem("case01_evidence");
-localStorage.removeItem("case01_notes");
-localStorage.removeItem("case01_person_notes");
+localStorage.removeItem(
+"case01_evidence"
+);
+
+localStorage.removeItem(
+"case01_notes"
+);
+
+localStorage.removeItem(
+"case01_person_notes"
+);
 
 location.reload();
 
@@ -712,7 +1082,9 @@ location.reload();
 
 }
 
-document.addEventListener("input",e=>{
+document.addEventListener(
+"input",
+e=>{
 
 if(e.target.id==="notes"){
 
@@ -721,7 +1093,8 @@ localStorage.setItem(
 e.target.value
 );
 
-document.getElementById("ns").textContent="저장됨";
+document.getElementById("ns")
+.textContent="저장됨";
 
 }
 
@@ -731,8 +1104,10 @@ savePersonNote();
 
 }
 
-});
+}
+);
 
 </script>
+
 </body>
 </html>
