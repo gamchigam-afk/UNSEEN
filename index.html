@@ -1,1 +1,925 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Search N Guess — CASE 01</title>
+
+<style>
+
+/* =========================
+   기본 설정
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #0b0d0f;
+    color: #e8e8e8;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   시작 화면
+========================= */
+
+.screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.start-screen {
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+}
+
+.system {
+    color: #777;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 35px;
+}
+
+.case-box {
+    border: 1px solid #444;
+    padding: 45px 30px;
+    background: #111416;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+
+.case-label {
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: #888;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: 8px;
+    margin-bottom: 15px;
+}
+
+.status {
+    display: inline-block;
+    border: 1px solid #555;
+    padding: 7px 14px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin-bottom: 35px;
+}
+
+.info {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    padding: 20px 0;
+    margin-bottom: 35px;
+    color: #aaa;
+    line-height: 2;
+    font-size: 14px;
+}
+
+.start-button {
+    background: transparent;
+    color: white;
+    border: 1px solid #777;
+    padding: 15px 35px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    transition: 0.2s;
+}
+
+.start-button:hover {
+    background: white;
+    color: #0b0d0f;
+}
+
+.footer {
+    margin-top: 25px;
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   사건 접수 화면
+========================= */
+
+.intro {
+    width: 100%;
+    max-width: 650px;
+}
+
+.intro-header {
+    color: #777;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+}
+
+.intro-box {
+    border: 1px solid #444;
+    background: #111416;
+    padding: 40px;
+}
+
+.intro-title {
+    font-size: 30px;
+    letter-spacing: 5px;
+    margin-bottom: 30px;
+}
+
+.line {
+    height: 1px;
+    background: #333;
+    margin: 20px 0;
+}
+
+.data {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 1px solid #25282a;
+    padding: 14px 0;
+    font-size: 14px;
+}
+
+.data span:first-child {
+    color: #777;
+}
+
+.data span:last-child {
+    color: #ddd;
+    text-align: right;
+}
+
+.intro-warning {
+    color: #888;
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 25px 0 30px;
+}
+
+.center {
+    text-align: center;
+}
+
+.intro-button {
+    background: transparent;
+    color: white;
+    border: 1px solid #777;
+    padding: 14px 30px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: 0.2s;
+}
+
+.intro-button:hover {
+    background: white;
+    color: #0b0d0f;
+}
+
+
+/* =========================
+   조사 화면 공통
+========================= */
+
+.investigation {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar {
+    height: 65px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    background: #0f1113;
+}
+
+.logo {
+    letter-spacing: 3px;
+    font-size: 14px;
+}
+
+.case-status {
+    font-size: 11px;
+    color: #777;
+}
+
+.main {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    width: 210px;
+    border-right: 1px solid #333;
+    padding: 25px 15px;
+    background: #0e1012;
+}
+
+.sidebar-title {
+    font-size: 11px;
+    color: #666;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.menu {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #25282a;
+    padding: 13px 10px;
+    font-size: 13px;
+    color: #aaa;
+    transition: 0.2s;
+}
+
+.menu:hover {
+    background: #181b1d;
+    color: white;
+}
+
+.menu.active {
+    color: white;
+    background: #181b1d;
+}
+
+.content {
+    flex: 1;
+    padding: 40px;
+    max-width: 1000px;
+}
+
+.content h2 {
+    font-size: 28px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #777;
+    font-size: 13px;
+    margin-bottom: 30px;
+}
+
+.content-box {
+    border: 1px solid #333;
+    background: #111416;
+    padding: 30px;
+    line-height: 1.9;
+    color: #bbb;
+}
+
+.stats {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.stat {
+    border: 1px solid #333;
+    padding: 15px;
+    flex: 1;
+    background: #111416;
+}
+
+.stat-title {
+    color: #666;
+    font-size: 11px;
+}
+
+.stat-number {
+    font-size: 22px;
+    margin-top: 5px;
+}
+
+
+/* =========================
+   인물 페이지
+========================= */
+
+.people-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.person-card {
+    border: 1px solid #333;
+    background: #111416;
+    padding: 25px;
+    min-height: 140px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.person-card:hover {
+    border-color: #777;
+    background: #15181a;
+}
+
+.person-number {
+    font-size: 10px;
+    color: #666;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.person-name {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.person-status {
+    font-size: 11px;
+    color: #777;
+}
+
+
+/* =========================
+   모바일
+========================= */
+
+@media (max-width: 700px) {
+
+    h1 {
+        font-size: 42px;
+    }
+
+    .main {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #333;
+        display: flex;
+        overflow-x: auto;
+        padding: 10px;
+    }
+
+    .sidebar-title {
+        display: none;
+    }
+
+    .menu {
+        min-width: 100px;
+        border-bottom: none;
+        text-align: center;
+    }
+
+    .content {
+        padding: 25px 18px;
+    }
+
+    .stats {
+        flex-direction: column;
+    }
+
+    .people-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .intro-box {
+        padding: 25px;
+    }
+
+    .data {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .data span:last-child {
+        text-align: left;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     1. 시작 화면
+================================================== -->
+
+<div id="startScreen" class="screen">
+
+    <div class="start-screen">
+
+        <div class="system">
+            CASE DATABASE // ACCESS TERMINAL
+        </div>
+
+        <div class="case-box">
+
+            <div class="case-label">
+                CASE FILE
+            </div>
+
+            <h1>CASE 01</h1>
+
+            <div class="status">
+                STATUS : UNSOLVED
+            </div>
+
+            <div class="info">
+                사건 번호 : 01<br>
+                사건 발생일 : 1998.11.17<br>
+                사건 분류 : 미상
+            </div>
+
+            <button class="start-button" onclick="showIntro()">
+                사건 조사 시작
+            </button>
+
+        </div>
+
+        <div class="footer">
+            SEARCH N GUESS // CASE DATABASE
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     2. 사건 조사 개시
+================================================== -->
+
+<div id="introScreen" class="screen hidden">
+
+    <div class="intro">
+
+        <div class="intro-header">
+            CASE DATABASE // CASE 01
+        </div>
+
+        <div class="intro-box">
+
+            <div class="intro-title">
+                사건 조사 개시
+            </div>
+
+            <div class="line"></div>
+
+            <div class="data">
+                <span>사건 발생일</span>
+                <span>1998. 11. 17</span>
+            </div>
+
+            <div class="data">
+                <span>사건 장소</span>
+                <span>아르덴발 → 노르트 야간열차</span>
+            </div>
+
+            <div class="data">
+                <span>사건 분류</span>
+                <span>실종</span>
+            </div>
+
+            <div class="data">
+                <span>현재 상태</span>
+                <span>미해결</span>
+            </div>
+
+            <div class="intro-warning">
+                본 사건의 자료는 제한된 정보만을 포함하고 있습니다.<br>
+                확보된 자료를 바탕으로 사건의 전말을 추론하십시오.
+            </div>
+
+            <div class="center">
+
+                <button class="intro-button" onclick="openCase()">
+                    사건 파일 열기
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     3. 사건 개요
+================================================== -->
+
+<div id="investigationScreen" class="investigation hidden">
+
+    <div class="topbar">
+
+        <div class="logo">
+            SEARCH N GUESS
+        </div>
+
+        <div class="case-status">
+            CASE 01 // UNSOLVED
+        </div>
+
+    </div>
+
+
+    <div class="main">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                CASE FILE
+            </div>
+
+            <button class="menu active">
+                📁 사건 개요
+            </button>
+
+            <button class="menu" onclick="showPeople()">
+                👤 인물
+            </button>
+
+            <button class="menu">
+                📷 증거물
+            </button>
+
+            <button class="menu">
+                📋 기록
+            </button>
+
+            <button class="menu">
+                🗺️ 열차
+            </button>
+
+            <button class="menu">
+                🧠 추리 노트
+            </button>
+
+        </aside>
+
+
+        <main class="content">
+
+            <h2>사건 개요</h2>
+
+            <div class="subtitle">
+                CASE 01 — 마지막 객차
+            </div>
+
+            <div class="content-box">
+
+                1998년 11월 17일,<br>
+                아르덴발에서 출발한 야간열차에서
+                한 승객이 종착역 도착 직전 사라졌습니다.
+
+                <br><br>
+
+                해당 승객의 좌석에는 개인 소지품 일부가
+                남아 있었지만, 승객 본인은 발견되지 않았습니다.
+
+                <br><br>
+
+                현재까지 사건은 미해결 상태로 남아 있습니다.
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat">
+                    <div class="stat-title">
+                        발견한 단서
+                    </div>
+
+                    <div class="stat-number">
+                        0 / 24
+                    </div>
+                </div>
+
+
+                <div class="stat">
+                    <div class="stat-title">
+                        확인한 인물
+                    </div>
+
+                    <div class="stat-number">
+                        0 / 5
+                    </div>
+                </div>
+
+
+                <div class="stat">
+                    <div class="stat-title">
+                        사건 해결도
+                    </div>
+
+                    <div class="stat-number">
+                        0%
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     4. 인물 페이지
+================================================== -->
+
+<div id="peopleScreen" class="investigation hidden">
+
+    <div class="topbar">
+
+        <div class="logo">
+            SEARCH N GUESS
+        </div>
+
+        <div class="case-status">
+            CASE 01 // PEOPLE
+        </div>
+
+    </div>
+
+
+    <div class="main">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                CASE FILE
+            </div>
+
+            <button class="menu" onclick="showOverview()">
+                📁 사건 개요
+            </button>
+
+            <button class="menu active">
+                👤 인물
+            </button>
+
+            <button class="menu">
+                📷 증거물
+            </button>
+
+            <button class="menu">
+                📋 기록
+            </button>
+
+            <button class="menu">
+                🗺️ 열차
+            </button>
+
+            <button class="menu">
+                🧠 추리 노트
+            </button>
+
+        </aside>
+
+
+        <main class="content">
+
+            <h2>인물</h2>
+
+            <div class="subtitle">
+                CASE 01 — 관련 인물 기록
+            </div>
+
+
+            <div class="people-grid">
+
+                <div class="person-card">
+
+                    <div class="person-number">
+                        PERSON 01
+                    </div>
+
+                    <div class="person-name">
+                        알렉스 모건
+                    </div>
+
+                    <div class="person-status">
+                        신원 불명
+                    </div>
+
+                </div>
+
+
+                <div class="person-card">
+
+                    <div class="person-number">
+                        PERSON 02
+                    </div>
+
+                    <div class="person-name">
+                        승무원
+                    </div>
+
+                    <div class="person-status">
+                        조사 필요
+                    </div>
+
+                </div>
+
+
+                <div class="person-card">
+
+                    <div class="person-number">
+                        PERSON 03
+                    </div>
+
+                    <div class="person-name">
+                        승객 A
+                    </div>
+
+                    <div class="person-status">
+                        조사 필요
+                    </div>
+
+                </div>
+
+
+                <div class="person-card">
+
+                    <div class="person-number">
+                        PERSON 04
+                    </div>
+
+                    <div class="person-name">
+                        승객 B
+                    </div>
+
+                    <div class="person-status">
+                        조사 필요
+                    </div>
+
+                </div>
+
+
+                <div class="person-card">
+
+                    <div class="person-number">
+                        PERSON 05
+                    </div>
+
+                    <div class="person-name">
+                        미확인 인물
+                    </div>
+
+                    <div class="person-status">
+                        정보 부족
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   화면 전환
+================================================== */
+
+function showScreen(screenName) {
+
+    document.getElementById("startScreen").classList.add("hidden");
+    document.getElementById("introScreen").classList.add("hidden");
+    document.getElementById("investigationScreen").classList.add("hidden");
+    document.getElementById("peopleScreen").classList.add("hidden");
+
+    document.getElementById(screenName).classList.remove("hidden");
+
+}
+
+
+/* ==================================================
+   저장
+================================================== */
+
+function saveScreen(screenName) {
+
+    localStorage.setItem("currentScreen", screenName);
+
+}
+
+
+/* ==================================================
+   사건 조사 시작
+================================================== */
+
+function showIntro() {
+
+    saveScreen("introScreen");
+
+    showScreen("introScreen");
+
+}
+
+
+/* ==================================================
+   사건 파일 열기
+================================================== */
+
+function openCase() {
+
+    saveScreen("investigationScreen");
+
+    showScreen("investigationScreen");
+
+}
+
+
+/* ==================================================
+   인물 페이지
+================================================== */
+
+function showPeople() {
+
+    saveScreen("peopleScreen");
+
+    showScreen("peopleScreen");
+
+}
+
+
+/* ==================================================
+   사건 개요로 돌아가기
+================================================== */
+
+function showOverview() {
+
+    saveScreen("investigationScreen");
+
+    showScreen("investigationScreen");
+
+}
+
+
+/* ==================================================
+   새로고침 시 마지막 화면 복구
+================================================== */
+
+window.addEventListener("DOMContentLoaded", function() {
+
+    const savedScreen = localStorage.getItem("currentScreen");
+
+    if (savedScreen) {
+
+        showScreen(savedScreen);
+
+    } else {
+
+        showScreen("startScreen");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
