@@ -354,7 +354,7 @@ h1 {
 
 
 /* =========================
-   7호차 조사 페이지
+   7호차 조사
 ========================= */
 
 .train-interior {
@@ -414,6 +414,76 @@ h1 {
 
 
 /* =========================
+   추리 노트
+========================= */
+
+.notes-container {
+    width: 100%;
+}
+
+.notes-area {
+    width: 100%;
+    min-height: 420px;
+
+    background: #111416;
+    color: #ddd;
+
+    border: 1px solid #444;
+
+    padding: 25px;
+
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.8;
+
+    resize: vertical;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.notes-area:focus {
+    border-color: #777;
+}
+
+.notes-area::placeholder {
+    color: #555;
+}
+
+.notes-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 15px;
+}
+
+.save-status {
+    color: #555;
+    font-size: 11px;
+}
+
+.clear-notes {
+    background: transparent;
+    color: #777;
+
+    border: 1px solid #333;
+
+    padding: 9px 15px;
+
+    font-size: 11px;
+
+    transition: 0.2s;
+}
+
+.clear-notes:hover {
+    color: white;
+    border-color: #777;
+}
+
+
+/* =========================
    모바일
 ========================= */
 
@@ -431,8 +501,10 @@ h1 {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid #333;
+
         display: flex;
         overflow-x: auto;
+
         padding: 10px;
     }
 
@@ -471,6 +543,17 @@ h1 {
     .data span:last-child {
         text-align: left;
     }
+
+    .notes-area {
+        min-height: 350px;
+    }
+
+    .notes-footer {
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+    }
+
 }
 
 </style>
@@ -632,7 +715,7 @@ h1 {
                 🗺️ 열차
             </button>
 
-            <button class="menu">
+            <button class="menu" onclick="showNotes()">
                 🧠 추리 노트
             </button>
 
@@ -668,6 +751,7 @@ h1 {
             <div class="stats">
 
                 <div class="stat">
+
                     <div class="stat-title">
                         발견한 단서
                     </div>
@@ -675,10 +759,12 @@ h1 {
                     <div class="stat-number">
                         0 / 24
                     </div>
+
                 </div>
 
 
                 <div class="stat">
+
                     <div class="stat-title">
                         확인한 인물
                     </div>
@@ -686,10 +772,12 @@ h1 {
                     <div class="stat-number">
                         0 / 5
                     </div>
+
                 </div>
 
 
                 <div class="stat">
+
                     <div class="stat-title">
                         사건 해결도
                     </div>
@@ -697,6 +785,7 @@ h1 {
                     <div class="stat-number">
                         0%
                     </div>
+
                 </div>
 
             </div>
@@ -755,7 +844,7 @@ h1 {
                 🗺️ 열차
             </button>
 
-            <button class="menu">
+            <button class="menu" onclick="showNotes()">
                 🧠 추리 노트
             </button>
 
@@ -913,7 +1002,7 @@ h1 {
                 🗺️ 열차
             </button>
 
-            <button class="menu">
+            <button class="menu" onclick="showNotes()">
                 🧠 추리 노트
             </button>
 
@@ -931,8 +1020,6 @@ h1 {
 
             <div class="train-interior">
 
-
-                <!-- 좌석 구역 -->
 
                 <div class="train-area">
 
@@ -955,8 +1042,6 @@ h1 {
                 </div>
 
 
-                <!-- 출입문 -->
-
                 <div class="train-area">
 
                     <div class="area-icon">
@@ -977,8 +1062,6 @@ h1 {
 
                 </div>
 
-
-                <!-- 화장실 -->
 
                 <div class="train-area">
 
@@ -1001,8 +1084,6 @@ h1 {
                 </div>
 
 
-                <!-- 짐칸 -->
-
                 <div class="train-area">
 
                     <div class="area-icon">
@@ -1024,8 +1105,6 @@ h1 {
                 </div>
 
 
-                <!-- 창가 -->
-
                 <div class="train-area">
 
                     <div class="area-icon">
@@ -1046,8 +1125,6 @@ h1 {
 
                 </div>
 
-
-                <!-- 객차 연결부 -->
 
                 <div class="train-area">
 
@@ -1078,26 +1155,132 @@ h1 {
 </div>
 
 
+<!-- ==================================================
+     6. 추리 노트
+================================================== -->
+
+<div id="notesScreen" class="investigation hidden">
+
+    <div class="topbar">
+
+        <div class="logo">
+            SEARCH N GUESS
+        </div>
+
+        <div class="case-status">
+            CASE 01 // NOTES
+        </div>
+
+    </div>
+
+
+    <div class="main">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                CASE FILE
+            </div>
+
+            <button class="menu" onclick="showOverview()">
+                📁 사건 개요
+            </button>
+
+            <button class="menu" onclick="showPeople()">
+                👤 인물
+            </button>
+
+            <button class="menu">
+                📷 증거물
+            </button>
+
+            <button class="menu">
+                📋 기록
+            </button>
+
+            <button class="menu" onclick="showTrain()">
+                🗺️ 열차
+            </button>
+
+            <button class="menu active">
+                🧠 추리 노트
+            </button>
+
+        </aside>
+
+
+        <main class="content">
+
+            <h2>추리 노트</h2>
+
+            <div class="subtitle">
+                발견한 사실과 추리를 자유롭게 기록하십시오.
+            </div>
+
+
+            <div class="notes-container">
+
+                <textarea
+                    id="notesArea"
+                    class="notes-area"
+                    placeholder="여기에 자유롭게 기록하십시오...
+
+예:
+23:40 — 승무원의 진술이 이상함
+14번 좌석과 관련된 단서가 있는 것 같다
+알렉스의 이동 경로를 확인해야 함"
+                ></textarea>
+
+
+                <div class="notes-footer">
+
+                    <div id="saveStatus" class="save-status">
+                        자동 저장됨
+                    </div>
+
+                    <button
+                        class="clear-notes"
+                        onclick="clearNotes()">
+                        전체 삭제
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
 <script>
 
-/* =========================
+/* ==================================================
    모든 화면 숨기기
-========================= */
+================================================== */
 
 function hideAllScreens() {
 
     document.getElementById("startScreen").classList.add("hidden");
+
     document.getElementById("introScreen").classList.add("hidden");
+
     document.getElementById("investigationScreen").classList.add("hidden");
+
     document.getElementById("peopleScreen").classList.add("hidden");
+
     document.getElementById("trainScreen").classList.add("hidden");
+
+    document.getElementById("notesScreen").classList.add("hidden");
 
 }
 
 
-/* =========================
+/* ==================================================
    화면 전환
-========================= */
+================================================== */
 
 function showScreen(screenName) {
 
@@ -1108,9 +1291,9 @@ function showScreen(screenName) {
 }
 
 
-/* =========================
+/* ==================================================
    현재 화면 저장
-========================= */
+================================================== */
 
 function saveScreen(screenName) {
 
@@ -1119,9 +1302,9 @@ function saveScreen(screenName) {
 }
 
 
-/* =========================
+/* ==================================================
    사건 조사 시작
-========================= */
+================================================== */
 
 function showIntro() {
 
@@ -1132,9 +1315,9 @@ function showIntro() {
 }
 
 
-/* =========================
+/* ==================================================
    사건 파일 열기
-========================= */
+================================================== */
 
 function openCase() {
 
@@ -1145,9 +1328,9 @@ function openCase() {
 }
 
 
-/* =========================
+/* ==================================================
    사건 개요
-========================= */
+================================================== */
 
 function showOverview() {
 
@@ -1158,9 +1341,9 @@ function showOverview() {
 }
 
 
-/* =========================
+/* ==================================================
    인물
-========================= */
+================================================== */
 
 function showPeople() {
 
@@ -1171,9 +1354,9 @@ function showPeople() {
 }
 
 
-/* =========================
+/* ==================================================
    열차
-========================= */
+================================================== */
 
 function showTrain() {
 
@@ -1184,11 +1367,87 @@ function showTrain() {
 }
 
 
-/* =========================
-   새로고침 시 마지막 화면 복구
-========================= */
+/* ==================================================
+   추리 노트
+================================================== */
+
+function showNotes() {
+
+    saveScreen("notesScreen");
+
+    showScreen("notesScreen");
+
+}
+
+
+/* ==================================================
+   추리 노트 자동 저장
+================================================== */
+
+const notesArea = document.getElementById("notesArea");
+
+const saveStatus = document.getElementById("saveStatus");
+
+
+notesArea.addEventListener("input", function() {
+
+    localStorage.setItem(
+        "case01_notes",
+        notesArea.value
+    );
+
+    saveStatus.textContent = "저장됨";
+
+});
+
+
+/* ==================================================
+   추리 노트 불러오기
+================================================== */
+
+function loadNotes() {
+
+    const savedNotes =
+        localStorage.getItem("case01_notes");
+
+    if (savedNotes !== null) {
+
+        notesArea.value = savedNotes;
+
+    }
+
+}
+
+
+/* ==================================================
+   추리 노트 전체 삭제
+================================================== */
+
+function clearNotes() {
+
+    const confirmDelete =
+        confirm("추리 노트를 전부 삭제할까요?");
+
+    if (!confirmDelete) {
+        return;
+    }
+
+    notesArea.value = "";
+
+    localStorage.removeItem("case01_notes");
+
+    saveStatus.textContent = "삭제됨";
+
+}
+
+
+/* ==================================================
+   페이지 로드
+================================================== */
 
 window.addEventListener("DOMContentLoaded", function() {
+
+    loadNotes();
 
     const savedScreen =
         localStorage.getItem("currentScreen");
