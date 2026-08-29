@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CASE 01</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: #0b0d0f;
+        color: #e8e8e8;
+        font-family: Arial, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .screen {
+        width: 90%;
+        max-width: 700px;
+        text-align: center;
+    }
+
+    .system {
+        color: #777;
+        font-size: 12px;
+        letter-spacing: 3px;
+        margin-bottom: 35px;
+    }
+
+    .case {
+        border: 1px solid #444;
+        padding: 45px 30px;
+        background: #111416;
+        box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+
+    .case-label {
+        font-size: 14px;
+        letter-spacing: 6px;
+        color: #888;
+        margin-bottom: 18px;
+    }
+
+    h1 {
+        font-size: 64px;
+        font-weight: 700;
+        letter-spacing: 8px;
+        margin-bottom: 15px;
+    }
+
+    .status {
+        display: inline-block;
+        border: 1px solid #555;
+        padding: 7px 14px;
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: #aaa;
+        margin-bottom: 35px;
+    }
+
+    .info {
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #333;
+        padding: 20px 0;
+        margin-bottom: 35px;
+        color: #aaa;
+        line-height: 2;
+        font-size: 14px;
+    }
+
+    .start {
+        background: transparent;
+        color: white;
+        border: 1px solid #777;
+        padding: 15px 35px;
+        font-size: 14px;
+        letter-spacing: 3px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .start:hover {
+        background: white;
+        color: #0b0d0f;
+    }
+
+    .footer {
+        margin-top: 25px;
+        font-size: 10px;
+        color: #555;
+        letter-spacing: 2px;
+    }
+
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 42px;
+        }
+
+        .case {
+            padding: 35px 20px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+    <div class="system">
+        CASE DATABASE // ACCESS TERMINAL
+    </div>
+
+    <div class="case">
+
+        <div class="case-label">
+            CASE FILE
+        </div>
+
+        <h1>CASE 01</h1>
+
+        <div class="status">
+            STATUS : UNSOLVED
+        </div>
+
+        <div class="info">
+            사건 번호 : 01<br>
+            사건 발생일 : 1998.11.17<br>
+            사건 분류 : 미상
+        </div>
+
+        <button class="start" onclick="startCase()">
+            사건 조사 시작
+        </button>
+
+    </div>
+
+    <div class="footer">
+        CLASSIFIED // AUTHORIZED ACCESS ONLY
+    </div>
+
+</div>
+
+<script>
+function startCase() {
+    alert("CASE 01 조사를 시작합니다.");
+}
+</script>
+
+</body>
+</html>
