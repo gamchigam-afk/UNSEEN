@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -76,7 +77,6 @@ button {
 
 h1 {
     font-size: 64px;
-    font-weight: 700;
     letter-spacing: 8px;
     margin-bottom: 15px;
 }
@@ -101,17 +101,19 @@ h1 {
     font-size: 14px;
 }
 
-.start-button {
+.start-button,
+.intro-button {
     background: transparent;
     color: white;
     border: 1px solid #777;
-    padding: 15px 35px;
+    padding: 14px 30px;
     font-size: 14px;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     transition: 0.2s;
 }
 
-.start-button:hover {
+.start-button:hover,
+.intro-button:hover {
     background: white;
     color: #0b0d0f;
 }
@@ -125,7 +127,7 @@ h1 {
 
 
 /* =========================
-   사건 접수 화면
+   사건 조사 개시
 ========================= */
 
 .intro {
@@ -185,21 +187,6 @@ h1 {
 
 .center {
     text-align: center;
-}
-
-.intro-button {
-    background: transparent;
-    color: white;
-    border: 1px solid #777;
-    padding: 14px 30px;
-    font-size: 14px;
-    letter-spacing: 2px;
-    transition: 0.2s;
-}
-
-.intro-button:hover {
-    background: white;
-    color: #0b0d0f;
 }
 
 
@@ -367,6 +354,66 @@ h1 {
 
 
 /* =========================
+   7호차 조사 페이지
+========================= */
+
+.train-interior {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.train-area {
+    border: 1px solid #333;
+    background: #111416;
+    padding: 22px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.2s;
+}
+
+.train-area:hover {
+    border-color: #555;
+}
+
+.area-icon {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.area-name {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.area-description {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.investigate-button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    color: #aaa;
+    border: 1px solid #444;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: 0.2s;
+}
+
+.investigate-button:hover {
+    background: #eee;
+    color: #111;
+    border-color: #eee;
+}
+
+
+/* =========================
    모바일
 ========================= */
 
@@ -407,7 +454,8 @@ h1 {
         flex-direction: column;
     }
 
-    .people-grid {
+    .people-grid,
+    .train-interior {
         grid-template-columns: 1fr;
     }
 
@@ -504,7 +552,7 @@ h1 {
 
             <div class="data">
                 <span>사건 장소</span>
-                <span>아르덴발 → 노르트 야간열차</span>
+                <span>7호차</span>
             </div>
 
             <div class="data">
@@ -580,7 +628,7 @@ h1 {
                 📋 기록
             </button>
 
-            <button class="menu">
+            <button class="menu" onclick="showTrain()">
                 🗺️ 열차
             </button>
 
@@ -602,8 +650,8 @@ h1 {
             <div class="content-box">
 
                 1998년 11월 17일,<br>
-                아르덴발에서 출발한 야간열차에서
-                한 승객이 종착역 도착 직전 사라졌습니다.
+                7호차에서 한 승객이 종착역 도착 직전
+                사라졌습니다.
 
                 <br><br>
 
@@ -703,7 +751,7 @@ h1 {
                 📋 기록
             </button>
 
-            <button class="menu">
+            <button class="menu" onclick="showTrain()">
                 🗺️ 열차
             </button>
 
@@ -818,27 +866,251 @@ h1 {
 </div>
 
 
+<!-- ==================================================
+     5. 7호차 조사
+================================================== -->
+
+<div id="trainScreen" class="investigation hidden">
+
+    <div class="topbar">
+
+        <div class="logo">
+            SEARCH N GUESS
+        </div>
+
+        <div class="case-status">
+            CASE 01 // TRAIN 07
+        </div>
+
+    </div>
+
+
+    <div class="main">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">
+                CASE FILE
+            </div>
+
+            <button class="menu" onclick="showOverview()">
+                📁 사건 개요
+            </button>
+
+            <button class="menu" onclick="showPeople()">
+                👤 인물
+            </button>
+
+            <button class="menu">
+                📷 증거물
+            </button>
+
+            <button class="menu">
+                📋 기록
+            </button>
+
+            <button class="menu active">
+                🗺️ 열차
+            </button>
+
+            <button class="menu">
+                🧠 추리 노트
+            </button>
+
+        </aside>
+
+
+        <main class="content">
+
+            <h2>7호차</h2>
+
+            <div class="subtitle">
+                조사할 장소를 선택하십시오.
+            </div>
+
+
+            <div class="train-interior">
+
+
+                <!-- 좌석 구역 -->
+
+                <div class="train-area">
+
+                    <div class="area-icon">
+                        💺
+                    </div>
+
+                    <div class="area-name">
+                        좌석 구역
+                    </div>
+
+                    <div class="area-description">
+                        승객들이 이용하던 좌석들.
+                    </div>
+
+                    <button class="investigate-button">
+                        조사
+                    </button>
+
+                </div>
+
+
+                <!-- 출입문 -->
+
+                <div class="train-area">
+
+                    <div class="area-icon">
+                        🚪
+                    </div>
+
+                    <div class="area-name">
+                        출입문
+                    </div>
+
+                    <div class="area-description">
+                        객차 양쪽에 위치한 출입문.
+                    </div>
+
+                    <button class="investigate-button">
+                        조사
+                    </button>
+
+                </div>
+
+
+                <!-- 화장실 -->
+
+                <div class="train-area">
+
+                    <div class="area-icon">
+                        🚻
+                    </div>
+
+                    <div class="area-name">
+                        화장실
+                    </div>
+
+                    <div class="area-description">
+                        객차 한쪽 끝에 위치한 화장실.
+                    </div>
+
+                    <button class="investigate-button">
+                        조사
+                    </button>
+
+                </div>
+
+
+                <!-- 짐칸 -->
+
+                <div class="train-area">
+
+                    <div class="area-icon">
+                        🧳
+                    </div>
+
+                    <div class="area-name">
+                        짐칸
+                    </div>
+
+                    <div class="area-description">
+                        승객들의 짐이 보관된 공간.
+                    </div>
+
+                    <button class="investigate-button">
+                        조사
+                    </button>
+
+                </div>
+
+
+                <!-- 창가 -->
+
+                <div class="train-area">
+
+                    <div class="area-icon">
+                        🪟
+                    </div>
+
+                    <div class="area-name">
+                        창가
+                    </div>
+
+                    <div class="area-description">
+                        열차 밖을 확인할 수 있는 창문.
+                    </div>
+
+                    <button class="investigate-button">
+                        조사
+                    </button>
+
+                </div>
+
+
+                <!-- 객차 연결부 -->
+
+                <div class="train-area">
+
+                    <div class="area-icon">
+                        🔗
+                    </div>
+
+                    <div class="area-name">
+                        객차 연결부
+                    </div>
+
+                    <div class="area-description">
+                        다른 객차와 연결되는 통로.
+                    </div>
+
+                    <button class="investigate-button">
+                        조사
+                    </button>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
 <script>
 
-/* ==================================================
-   화면 전환
-================================================== */
+/* =========================
+   모든 화면 숨기기
+========================= */
 
-function showScreen(screenName) {
+function hideAllScreens() {
 
     document.getElementById("startScreen").classList.add("hidden");
     document.getElementById("introScreen").classList.add("hidden");
     document.getElementById("investigationScreen").classList.add("hidden");
     document.getElementById("peopleScreen").classList.add("hidden");
+    document.getElementById("trainScreen").classList.add("hidden");
+
+}
+
+
+/* =========================
+   화면 전환
+========================= */
+
+function showScreen(screenName) {
+
+    hideAllScreens();
 
     document.getElementById(screenName).classList.remove("hidden");
 
 }
 
 
-/* ==================================================
-   저장
-================================================== */
+/* =========================
+   현재 화면 저장
+========================= */
 
 function saveScreen(screenName) {
 
@@ -847,9 +1119,9 @@ function saveScreen(screenName) {
 }
 
 
-/* ==================================================
+/* =========================
    사건 조사 시작
-================================================== */
+========================= */
 
 function showIntro() {
 
@@ -860,9 +1132,9 @@ function showIntro() {
 }
 
 
-/* ==================================================
+/* =========================
    사건 파일 열기
-================================================== */
+========================= */
 
 function openCase() {
 
@@ -873,22 +1145,9 @@ function openCase() {
 }
 
 
-/* ==================================================
-   인물 페이지
-================================================== */
-
-function showPeople() {
-
-    saveScreen("peopleScreen");
-
-    showScreen("peopleScreen");
-
-}
-
-
-/* ==================================================
-   사건 개요로 돌아가기
-================================================== */
+/* =========================
+   사건 개요
+========================= */
 
 function showOverview() {
 
@@ -899,13 +1158,40 @@ function showOverview() {
 }
 
 
-/* ==================================================
+/* =========================
+   인물
+========================= */
+
+function showPeople() {
+
+    saveScreen("peopleScreen");
+
+    showScreen("peopleScreen");
+
+}
+
+
+/* =========================
+   열차
+========================= */
+
+function showTrain() {
+
+    saveScreen("trainScreen");
+
+    showScreen("trainScreen");
+
+}
+
+
+/* =========================
    새로고침 시 마지막 화면 복구
-================================================== */
+========================= */
 
 window.addEventListener("DOMContentLoaded", function() {
 
-    const savedScreen = localStorage.getItem("currentScreen");
+    const savedScreen =
+        localStorage.getItem("currentScreen");
 
     if (savedScreen) {
 
