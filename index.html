@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Search N Guess — CASE 01</title>
 
 <style>
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,7 +13,7 @@
 }
 
 body {
-    background: #0b0d0f;
+    background: #090b0d;
     color: #e8e8e8;
     font-family: Arial, sans-serif;
     min-height: 100vh;
@@ -31,213 +29,136 @@ button {
 }
 
 
-/* =========================
+/* ================================
    시작 화면
-========================= */
+================================ */
 
 .screen {
     min-height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     padding: 25px;
 }
 
-.start-screen {
+.start-wrap {
     width: 100%;
     max-width: 700px;
     text-align: center;
 }
 
 .system {
-    color: #777;
-    font-size: 12px;
-    letter-spacing: 3px;
-    margin-bottom: 35px;
+    color: #666;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
 }
 
-.case-box {
-    border: 1px solid #444;
-    padding: 45px 30px;
+.start-box {
+    border: 1px solid #3c3f42;
     background: #111416;
+    padding: 50px 30px;
 }
 
 .case-label {
-    font-size: 14px;
-    letter-spacing: 6px;
-    color: #888;
-    margin-bottom: 18px;
+    color: #777;
+    font-size: 13px;
+    letter-spacing: 5px;
+    margin-bottom: 20px;
 }
 
-h1 {
-    font-size: 64px;
+.start-box h1 {
+    font-size: 58px;
     letter-spacing: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 
 .status {
     display: inline-block;
     border: 1px solid #555;
-    padding: 7px 14px;
-    font-size: 11px;
+    padding: 7px 13px;
+    color: #999;
+    font-size: 10px;
     letter-spacing: 2px;
-    color: #aaa;
-    margin-bottom: 35px;
 }
 
-.info {
+.start-info {
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
-    padding: 20px 0;
-    margin-bottom: 35px;
-    color: #aaa;
-    line-height: 2;
-    font-size: 14px;
-}
-
-.start-button,
-.intro-button {
-    background: transparent;
-    color: white;
-    border: 1px solid #777;
-    padding: 14px 30px;
-    font-size: 14px;
-    letter-spacing: 2px;
-}
-
-.start-button:hover,
-.intro-button:hover {
-    background: white;
-    color: #111;
-}
-
-.footer {
-    margin-top: 25px;
-    font-size: 10px;
-    color: #555;
-    letter-spacing: 2px;
-}
-
-
-/* =========================
-   조사 개시
-========================= */
-
-.intro {
-    width: 100%;
-    max-width: 650px;
-}
-
-.intro-header {
-    color: #777;
-    font-size: 12px;
-    letter-spacing: 3px;
-    margin-bottom: 25px;
-}
-
-.intro-box {
-    border: 1px solid #444;
-    background: #111416;
-    padding: 40px;
-}
-
-.intro-title {
-    font-size: 30px;
-    letter-spacing: 5px;
-    margin-bottom: 30px;
-}
-
-.line {
-    height: 1px;
-    background: #333;
-    margin: 20px 0;
-}
-
-.data {
-    display: flex;
-    justify-content: space-between;
-    padding: 14px 0;
-    border-bottom: 1px solid #25282a;
-    font-size: 14px;
-}
-
-.data span:first-child {
-    color: #777;
-}
-
-.data span:last-child {
-    color: #ddd;
-    text-align: right;
-}
-
-.intro-warning {
+    margin: 35px 0;
+    padding: 20px;
     color: #888;
-    font-size: 12px;
-    line-height: 1.8;
-    margin: 25px 0 30px;
+    line-height: 2;
+    font-size: 13px;
 }
 
-.center {
-    text-align: center;
+.main-button {
+    padding: 14px 28px;
+    background: transparent;
+    border: 1px solid #777;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.main-button:hover {
+    background: white;
+    color: black;
 }
 
 
-/* =========================
-   조사 화면
-========================= */
-
-.investigation {
-    min-height: 100vh;
-}
+/* ================================
+   공통 레이아웃
+================================ */
 
 .topbar {
-    height: 65px;
+    height: 62px;
     border-bottom: 1px solid #333;
+    background: #0e1012;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 25px;
-    background: #0f1113;
+    padding: 0 24px;
 }
 
 .logo {
+    font-size: 13px;
     letter-spacing: 3px;
-    font-size: 14px;
 }
 
-.case-status {
-    font-size: 11px;
-    color: #777;
+.top-status {
+    color: #666;
+    font-size: 10px;
+    letter-spacing: 2px;
 }
 
-.main {
+.layout {
     display: flex;
-    min-height: calc(100vh - 65px);
+    min-height: calc(100vh - 62px);
 }
 
 .sidebar {
-    width: 210px;
+    width: 205px;
     border-right: 1px solid #333;
-    padding: 25px 15px;
-    background: #0e1012;
+    background: #0d0f11;
+    padding: 20px 12px;
 }
 
 .sidebar-title {
-    font-size: 11px;
-    color: #666;
+    color: #555;
+    font-size: 10px;
     letter-spacing: 2px;
-    margin-bottom: 15px;
+    margin: 5px 10px 12px;
 }
 
 .menu {
     width: 100%;
-    text-align: left;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #25282a;
     padding: 13px 10px;
-    font-size: 13px;
-    color: #aaa;
+    background: transparent;
+    color: #888;
+    border: 0;
+    border-bottom: 1px solid #222;
+    text-align: left;
+    font-size: 12px;
 }
 
 .menu:hover,
@@ -248,262 +169,334 @@ h1 {
 
 .content {
     flex: 1;
-    padding: 40px;
-    max-width: 1050px;
+    max-width: 1100px;
+    padding: 38px;
 }
 
 .content h2 {
-    font-size: 28px;
+    font-size: 27px;
     letter-spacing: 3px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .subtitle {
-    color: #777;
-    font-size: 13px;
-    margin-bottom: 30px;
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 28px;
 }
 
-.content-box {
+.panel {
     border: 1px solid #333;
     background: #111416;
-    padding: 30px;
+    padding: 28px;
     line-height: 1.9;
-    color: #bbb;
+    color: #aaa;
 }
 
 
-/* =========================
+/* ================================
    진행도
-========================= */
+================================ */
 
-.progress-box {
-    margin-top: 25px;
+.progress-panel {
     border: 1px solid #333;
-    padding: 22px;
     background: #111416;
+    margin-top: 20px;
+    padding: 20px;
 }
 
-.progress-top {
+.progress-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
-    font-size: 12px;
+    margin-bottom: 10px;
+    font-size: 11px;
 }
 
-.progress-top span:first-child {
-    color: #777;
+.progress-header span:first-child {
+    color: #666;
 }
 
 .progress-bar {
     width: 100%;
-    height: 7px;
+    height: 6px;
     background: #25282a;
 }
 
 .progress-fill {
-    height: 100%;
     width: 0%;
+    height: 100%;
     background: #ddd;
-    transition: width 0.4s;
+    transition: width .3s;
 }
 
 
-/* =========================
+/* ================================
    인물
-========================= */
+================================ */
 
 .people-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 14px;
 }
 
 .person-card {
     border: 1px solid #333;
     background: #111416;
-    padding: 25px;
-    min-height: 140px;
+    padding: 23px;
 }
 
-.person-number {
-    font-size: 10px;
-    color: #666;
+.person-id {
+    color: #555;
+    font-size: 9px;
     letter-spacing: 2px;
-    margin-bottom: 18px;
+    margin-bottom: 13px;
 }
 
 .person-name {
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 7px;
 }
 
-.person-status {
+.person-role {
+    color: #666;
     font-size: 11px;
-    color: #777;
 }
 
 
-/* =========================
+/* ================================
    열차
-========================= */
+================================ */
 
-.train-interior {
+.train-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 14px;
 }
 
-.train-area {
+.train-card {
     border: 1px solid #333;
     background: #111416;
     padding: 22px;
-    min-height: 160px;
+    min-height: 165px;
     display: flex;
     flex-direction: column;
 }
 
-.area-icon {
-    font-size: 25px;
-    margin-bottom: 15px;
+.train-icon {
+    font-size: 24px;
+    margin-bottom: 13px;
 }
 
-.area-name {
-    font-size: 17px;
-    margin-bottom: 8px;
+.train-name {
+    font-size: 16px;
+    margin-bottom: 7px;
 }
 
-.area-description {
-    color: #777;
-    font-size: 12px;
-    line-height: 1.6;
+.train-desc {
+    color: #666;
+    font-size: 11px;
+    line-height: 1.7;
     flex: 1;
 }
 
-.investigate-button {
-    margin-top: 18px;
-    width: 100%;
+.investigate {
+    margin-top: 16px;
     padding: 10px;
+    border: 1px solid #444;
     background: transparent;
     color: #aaa;
-    border: 1px solid #444;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 2px;
 }
 
-.investigate-button:hover {
+.investigate:hover {
     background: #eee;
     color: #111;
 }
 
 
-/* =========================
-   증거물
-========================= */
+/* ================================
+   증거 목록
+================================ */
 
 .evidence-list {
     display: grid;
     gap: 12px;
 }
 
-.evidence-item {
+.evidence-card {
     border: 1px solid #333;
     background: #111416;
     padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
 }
 
-.evidence-number {
-    color: #666;
-    font-size: 10px;
+.evidence-card-info {
+    flex: 1;
+}
+
+.evidence-id {
+    color: #555;
+    font-size: 9px;
     letter-spacing: 2px;
     margin-bottom: 8px;
 }
 
 .evidence-name {
-    font-size: 17px;
-    margin-bottom: 8px;
+    font-size: 16px;
+    margin-bottom: 6px;
 }
 
 .evidence-location {
-    color: #777;
-    font-size: 11px;
+    color: #666;
+    font-size: 10px;
+}
+
+.detail-button {
+    background: transparent;
+    border: 1px solid #444;
+    color: #aaa;
+    padding: 9px 14px;
+    font-size: 10px;
+}
+
+.detail-button:hover {
+    background: white;
+    color: black;
 }
 
 .no-evidence {
     border: 1px solid #333;
     background: #111416;
-    padding: 45px 20px;
+    padding: 50px 20px;
     text-align: center;
-    color: #777;
+    color: #666;
     line-height: 2;
 }
 
 
-/* =========================
-   추리 노트
-========================= */
+/* ================================
+   증거 상세
+================================ */
 
-.notes-area {
+.detail-image {
     width: 100%;
-    min-height: 420px;
-    background: #111416;
-    color: #ddd;
+    max-width: 650px;
+    height: 350px;
+    margin: 0 auto 30px;
+
     border: 1px solid #444;
-    padding: 25px;
-    font-family: inherit;
-    font-size: 14px;
+    background: #0b0d0f;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #555;
+    font-size: 13px;
+}
+
+.detail-number {
+    color: #666;
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.detail-title {
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+.detail-row {
+    border-top: 1px solid #292c2e;
+    padding: 15px 0;
+}
+
+.detail-label {
+    color: #555;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 7px;
+}
+
+.detail-value {
+    color: #bbb;
+    font-size: 13px;
     line-height: 1.8;
+}
+
+.back-button {
+    margin-top: 25px;
+    padding: 11px 18px;
+    background: transparent;
+    border: 1px solid #444;
+    color: #aaa;
+}
+
+
+/* ================================
+   노트
+================================ */
+
+.notes {
+    width: 100%;
+    height: 430px;
     resize: vertical;
+    background: #111416;
+    border: 1px solid #444;
+    color: #ddd;
+    padding: 22px;
+    font-family: inherit;
+    line-height: 1.8;
     outline: none;
 }
 
-.notes-area:focus {
+.notes:focus {
     border-color: #777;
 }
 
-.notes-area::placeholder {
+.notes::placeholder {
     color: #555;
 }
 
-.notes-footer {
+.notes-bottom {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
+    margin-top: 12px;
 }
 
 .save-status {
     color: #555;
-    font-size: 11px;
+    font-size: 10px;
 }
 
-.clear-notes {
+.clear-button {
     background: transparent;
-    color: #777;
+    color: #666;
     border: 1px solid #333;
-    padding: 9px 15px;
-    font-size: 11px;
-}
-
-.clear-notes:hover {
-    color: white;
-    border-color: #777;
+    padding: 8px 12px;
 }
 
 
-/* =========================
-   조사 컷신
-========================= */
+/* ================================
+   컷신
+================================ */
 
 .cutscene {
     position: fixed;
     inset: 0;
+    z-index: 1000;
+
     background: #000;
-    z-index: 9999;
 
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
     padding: 25px;
 }
@@ -515,7 +508,8 @@ h1 {
 }
 
 .cutscene-text {
-    min-height: 100px;
+    min-height: 120px;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -523,95 +517,79 @@ h1 {
     color: #ddd;
     font-size: 18px;
     line-height: 2;
-    letter-spacing: 1px;
 
-    animation: fadeIn 1.2s ease;
+    animation: fade .9s;
 }
 
-.evidence-reveal {
+.reveal {
     display: none;
-    animation: fadeIn 1s ease;
+    animation: fade 1s;
 }
 
-.evidence-image {
+.reveal-image {
     width: 100%;
-    max-width: 450px;
-    height: 250px;
-
-    border: 1px solid #444;
-    background: #111416;
+    height: 280px;
+    border: 1px solid #333;
+    background: #0c0e10;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    margin: 0 auto 25px;
-
     color: #555;
     font-size: 12px;
+
+    margin-bottom: 25px;
 }
 
-.evidence-label {
-    color: #777;
-    font-size: 11px;
+.reveal-label {
+    color: #666;
+    font-size: 10px;
     letter-spacing: 3px;
     margin-bottom: 10px;
 }
 
-.evidence-title {
-    font-size: 24px;
+.reveal-title {
+    font-size: 22px;
     margin-bottom: 25px;
 }
 
-.cutscene-button {
+.reveal-button {
+    padding: 11px 25px;
     background: transparent;
     color: white;
     border: 1px solid #666;
-    padding: 12px 28px;
-    letter-spacing: 2px;
 }
 
-.cutscene-button:hover {
+.reveal-button:hover {
     background: white;
     color: black;
 }
 
-@keyframes fadeIn {
-
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 
-/* =========================
+/* ================================
    모바일
-========================= */
+================================ */
 
-@media (max-width: 700px) {
+@media(max-width:700px) {
 
-    h1 {
-        font-size: 42px;
-    }
-
-    .main {
+    .layout {
         flex-direction: column;
     }
 
     .sidebar {
         width: 100%;
-        border-right: none;
+        border-right: 0;
         border-bottom: 1px solid #333;
 
         display: flex;
         overflow-x: auto;
-
-        padding: 10px;
+        padding: 8px;
     }
 
     .sidebar-title {
@@ -620,58 +598,51 @@ h1 {
 
     .menu {
         min-width: 105px;
-        border-bottom: none;
         text-align: center;
+        border: 0;
     }
 
     .content {
-        padding: 25px 18px;
+        padding: 23px 16px;
     }
 
     .people-grid,
-    .train-interior {
+    .train-grid {
         grid-template-columns: 1fr;
     }
 
-    .intro-box {
-        padding: 25px;
+    .start-box h1 {
+        font-size: 42px;
     }
 
-    .data {
+    .evidence-card {
+        align-items: flex-start;
         flex-direction: column;
-        gap: 5px;
     }
 
-    .data span:last-child {
-        text-align: left;
+    .detail-image {
+        height: 250px;
     }
-
-    .cutscene-text {
-        font-size: 16px;
-    }
-
 }
-
 </style>
 </head>
-
 
 <body>
 
 
-<!-- ==================================================
-     START
-================================================== -->
+<!-- =========================================================
+     시작 화면
+========================================================= -->
 
-<div id="startScreen" class="screen">
+<section id="startScreen" class="screen">
 
-    <div class="start-screen">
+    <div class="start-wrap">
 
         <div class="system">
             CASE DATABASE // ACCESS TERMINAL
         </div>
 
-        <div class="case-box">
+        <div class="start-box">
 
             <div class="case-label">
                 CASE FILE
@@ -683,117 +654,42 @@ h1 {
                 STATUS : UNSOLVED
             </div>
 
-            <div class="info">
+            <div class="start-info">
                 사건 번호 : 01<br>
-                사건 발생일 : 1998.11.17<br>
+                사건 발생일 : 1998. 11. 17<br>
+                사건 장소 : 열차 7호차<br>
                 사건 분류 : 실종
             </div>
 
-            <button class="start-button" onclick="showIntro()">
+            <button
+                class="main-button"
+                onclick="showIntro()">
                 사건 조사 시작
             </button>
 
         </div>
 
-        <div class="footer">
-            SEARCH N GUESS // CASE DATABASE
-        </div>
-
     </div>
 
-</div>
+</section>
 
 
-<!-- ==================================================
-     INTRO
-================================================== -->
+<!-- =========================================================
+     사건 개요
+========================================================= -->
 
-<div id="introScreen" class="screen hidden">
-
-    <div class="intro">
-
-        <div class="intro-header">
-            CASE DATABASE // CASE 01
-        </div>
-
-        <div class="intro-box">
-
-            <div class="intro-title">
-                사건 조사 개시
-            </div>
-
-            <div class="line"></div>
-
-            <div class="data">
-                <span>사건 발생일</span>
-                <span>1998. 11. 17</span>
-            </div>
-
-            <div class="data">
-                <span>사건 장소</span>
-                <span>7호차</span>
-            </div>
-
-            <div class="data">
-                <span>사건 분류</span>
-                <span>실종</span>
-            </div>
-
-            <div class="data">
-                <span>현재 상태</span>
-                <span>미해결</span>
-            </div>
-
-            <div class="intro-warning">
-                본 사건의 자료는 제한된 정보만을 포함하고 있습니다.<br>
-                확보된 자료를 바탕으로 사건의 전말을 추론하십시오.
-            </div>
-
-            <div class="center">
-
-                <button
-                    class="intro-button"
-                    onclick="openCase()">
-
-                    사건 파일 열기
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- ==================================================
-     OVERVIEW
-================================================== -->
-
-<div id="investigationScreen" class="investigation hidden">
+<section id="overviewScreen" class="hidden">
 
     <div class="topbar">
-
-        <div class="logo">
-            SEARCH N GUESS
-        </div>
-
-        <div class="case-status">
-            CASE 01 // UNSOLVED
-        </div>
-
+        <div class="logo">SEARCH N GUESS</div>
+        <div class="top-status">CASE 01 // UNSOLVED</div>
     </div>
 
-
-    <div class="main">
+    <div class="layout">
 
         <aside class="sidebar">
 
-            <div class="sidebar-title">
-                CASE FILE
-            </div>
+            <div class="sidebar-title">CASE FILE</div>
 
             <button class="menu active" onclick="showOverview()">
                 📁 사건 개요
@@ -812,7 +708,7 @@ h1 {
             </button>
 
             <button class="menu" onclick="showTrain()">
-                🗺️ 열차
+                🚆 열차
             </button>
 
             <button class="menu" onclick="showNotes()">
@@ -820,7 +716,6 @@ h1 {
             </button>
 
         </aside>
-
 
         <main class="content">
 
@@ -830,45 +725,36 @@ h1 {
                 CASE 01 — 마지막 객차
             </div>
 
-            <div class="content-box">
+            <div class="panel">
+                1998년 11월 17일.<br><br>
 
-                1998년 11월 17일,<br>
-                7호차에서 한 승객이 종착역 도착 직전
-                사라졌습니다.
-
+                종착역에 도착하기 직전,
+                열차 7호차에서 승객 한 명이 사라졌다.
                 <br><br>
 
-                해당 승객의 좌석에는 개인 소지품 일부가
-                남아 있었지만, 승객 본인은 발견되지 않았습니다.
-
+                승객의 개인 소지품 일부는 객차에 남아 있었지만
+                본인은 발견되지 않았다.
                 <br><br>
 
-                현재까지 사건은 미해결 상태로 남아 있습니다.
+                당시 7호차에는 여러 명의 승객과 승무원이
+                타고 있었다.
+                <br><br>
 
+                사건은 현재까지 미해결 상태다.
             </div>
 
+            <div class="progress-panel">
 
-            <div class="progress-box">
-
-                <div class="progress-top">
-
-                    <span>
-                        조사 진행도
-                    </span>
-
-                    <span id="progressText">
-                        0 / 24
-                    </span>
-
+                <div class="progress-header">
+                    <span>조사 진행도</span>
+                    <span id="progressText">0 / 24</span>
                 </div>
 
                 <div class="progress-bar">
-
                     <div
                         id="progressFill"
                         class="progress-fill">
                     </div>
-
                 </div>
 
             </div>
@@ -877,35 +763,25 @@ h1 {
 
     </div>
 
-</div>
+</section>
 
 
-<!-- ==================================================
-     PEOPLE
-================================================== -->
+<!-- =========================================================
+     인물
+========================================================= -->
 
-<div id="peopleScreen" class="investigation hidden">
+<section id="peopleScreen" class="hidden">
 
     <div class="topbar">
-
-        <div class="logo">
-            SEARCH N GUESS
-        </div>
-
-        <div class="case-status">
-            CASE 01 // PEOPLE
-        </div>
-
+        <div class="logo">SEARCH N GUESS</div>
+        <div class="top-status">CASE 01 // PEOPLE</div>
     </div>
 
-
-    <div class="main">
+    <div class="layout">
 
         <aside class="sidebar">
 
-            <div class="sidebar-title">
-                CASE FILE
-            </div>
+            <div class="sidebar-title">CASE FILE</div>
 
             <button class="menu" onclick="showOverview()">
                 📁 사건 개요
@@ -924,7 +800,7 @@ h1 {
             </button>
 
             <button class="menu" onclick="showTrain()">
-                🗺️ 열차
+                🚆 열차
             </button>
 
             <button class="menu" onclick="showNotes()">
@@ -932,47 +808,45 @@ h1 {
             </button>
 
         </aside>
-
 
         <main class="content">
 
             <h2>인물</h2>
 
             <div class="subtitle">
-                CASE 01 — 관련 인물 기록
+                사건 관련 인물
             </div>
-
 
             <div class="people-grid">
 
                 <div class="person-card">
-                    <div class="person-number">PERSON 01</div>
+                    <div class="person-id">PERSON 01</div>
                     <div class="person-name">알렉스 모건</div>
-                    <div class="person-status">실종자</div>
+                    <div class="person-role">실종자</div>
                 </div>
 
                 <div class="person-card">
-                    <div class="person-number">PERSON 02</div>
+                    <div class="person-id">PERSON 02</div>
                     <div class="person-name">승객 B</div>
-                    <div class="person-status">용의자</div>
+                    <div class="person-role">승객 / 주요 조사 대상</div>
                 </div>
 
                 <div class="person-card">
-                    <div class="person-number">PERSON 03</div>
-                    <div class="person-name">승무원</div>
-                    <div class="person-status">목격자</div>
-                </div>
-
-                <div class="person-card">
-                    <div class="person-number">PERSON 04</div>
+                    <div class="person-id">PERSON 03</div>
                     <div class="person-name">승객 A</div>
-                    <div class="person-status">목격자</div>
+                    <div class="person-role">승객 / 목격자</div>
                 </div>
 
                 <div class="person-card">
-                    <div class="person-number">PERSON 05</div>
+                    <div class="person-id">PERSON 04</div>
                     <div class="person-name">승객 C</div>
-                    <div class="person-status">조사 필요</div>
+                    <div class="person-role">승객 / 목격자</div>
+                </div>
+
+                <div class="person-card">
+                    <div class="person-id">PERSON 05</div>
+                    <div class="person-name">승무원</div>
+                    <div class="person-role">열차 승무원</div>
                 </div>
 
             </div>
@@ -981,35 +855,25 @@ h1 {
 
     </div>
 
-</div>
+</section>
 
 
-<!-- ==================================================
-     EVIDENCE
-================================================== -->
+<!-- =========================================================
+     증거 목록
+========================================================= -->
 
-<div id="evidenceScreen" class="investigation hidden">
+<section id="evidenceScreen" class="hidden">
 
     <div class="topbar">
-
-        <div class="logo">
-            SEARCH N GUESS
-        </div>
-
-        <div class="case-status">
-            CASE 01 // EVIDENCE
-        </div>
-
+        <div class="logo">SEARCH N GUESS</div>
+        <div class="top-status">CASE 01 // EVIDENCE</div>
     </div>
 
-
-    <div class="main">
+    <div class="layout">
 
         <aside class="sidebar">
 
-            <div class="sidebar-title">
-                CASE FILE
-            </div>
+            <div class="sidebar-title">CASE FILE</div>
 
             <button class="menu" onclick="showOverview()">
                 📁 사건 개요
@@ -1028,7 +892,7 @@ h1 {
             </button>
 
             <button class="menu" onclick="showTrain()">
-                🗺️ 열차
+                🚆 열차
             </button>
 
             <button class="menu" onclick="showNotes()">
@@ -1037,51 +901,92 @@ h1 {
 
         </aside>
 
-
         <main class="content">
 
             <h2>증거물</h2>
 
             <div class="subtitle">
-                발견한 단서가 기록됩니다.
+                확보한 단서를 확인할 수 있습니다.
             </div>
 
-
-            <div id="evidenceList" class="evidence-list"></div>
+            <div
+                id="evidenceList"
+                class="evidence-list">
+            </div>
 
         </main>
 
     </div>
 
-</div>
+</section>
 
 
-<!-- ==================================================
-     TRAIN
-================================================== -->
+<!-- =========================================================
+     증거 상세
+========================================================= -->
 
-<div id="trainScreen" class="investigation hidden">
+<section id="detailScreen" class="hidden">
 
     <div class="topbar">
-
-        <div class="logo">
-            SEARCH N GUESS
-        </div>
-
-        <div class="case-status">
-            CASE 01 // TRAIN 07
-        </div>
-
+        <div class="logo">SEARCH N GUESS</div>
+        <div class="top-status">CASE 01 // EVIDENCE DETAIL</div>
     </div>
 
-
-    <div class="main">
+    <div class="layout">
 
         <aside class="sidebar">
 
-            <div class="sidebar-title">
-                CASE FILE
-            </div>
+            <div class="sidebar-title">CASE FILE</div>
+
+            <button class="menu" onclick="showOverview()">
+                📁 사건 개요
+            </button>
+
+            <button class="menu" onclick="showPeople()">
+                👤 인물
+            </button>
+
+            <button class="menu active" onclick="showEvidence()">
+                📷 증거물
+            </button>
+
+            <button class="menu" onclick="showTrain()">
+                🚆 열차
+            </button>
+
+            <button class="menu" onclick="showNotes()">
+                🧠 추리 노트
+            </button>
+
+        </aside>
+
+        <main class="content">
+
+            <div id="detailContent"></div>
+
+        </main>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     열차
+========================================================= -->
+
+<section id="trainScreen" class="hidden">
+
+    <div class="topbar">
+        <div class="logo">SEARCH N GUESS</div>
+        <div class="top-status">CASE 01 // TRAIN 07</div>
+    </div>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="sidebar-title">CASE FILE</div>
 
             <button class="menu" onclick="showOverview()">
                 📁 사건 개요
@@ -1100,7 +1005,7 @@ h1 {
             </button>
 
             <button class="menu active">
-                🗺️ 열차
+                🚆 열차
             </button>
 
             <button class="menu" onclick="showNotes()">
@@ -1108,7 +1013,6 @@ h1 {
             </button>
 
         </aside>
-
 
         <main class="content">
 
@@ -1118,143 +1022,129 @@ h1 {
                 조사할 장소를 선택하십시오.
             </div>
 
+            <div class="train-grid">
 
-            <div class="train-interior">
+                <div class="train-card">
 
+                    <div class="train-icon">💺</div>
 
-                <div class="train-area">
-
-                    <div class="area-icon">💺</div>
-
-                    <div class="area-name">
+                    <div class="train-name">
                         좌석 구역
                     </div>
 
-                    <div class="area-description">
-                        승객들이 이용하던 좌석들.
+                    <div class="train-desc">
+                        승객들이 이용하던 좌석과 작은 테이블이 있다.
                     </div>
 
                     <button
-                        class="investigate-button"
+                        class="investigate"
                         onclick="investigate('seat')">
-
                         조사
-
                     </button>
 
                 </div>
 
 
-                <div class="train-area">
+                <div class="train-card">
 
-                    <div class="area-icon">🚪</div>
+                    <div class="train-icon">🚪</div>
 
-                    <div class="area-name">
+                    <div class="train-name">
                         출입문
                     </div>
 
-                    <div class="area-description">
-                        객차 양쪽에 위치한 출입문.
+                    <div class="train-desc">
+                        객차 양쪽의 출입문과 주변 바닥을 조사할 수 있다.
                     </div>
 
                     <button
-                        class="investigate-button"
+                        class="investigate"
                         onclick="investigate('door')">
-
                         조사
-
                     </button>
 
                 </div>
 
 
-                <div class="train-area">
+                <div class="train-card">
 
-                    <div class="area-icon">🚻</div>
+                    <div class="train-icon">🚻</div>
 
-                    <div class="area-name">
+                    <div class="train-name">
                         화장실
                     </div>
 
-                    <div class="area-description">
-                        객차 한쪽 끝에 위치한 화장실.
+                    <div class="train-desc">
+                        세면대와 휴지통, 내부 바닥을 확인할 수 있다.
                     </div>
 
                     <button
-                        class="investigate-button"
+                        class="investigate"
                         onclick="investigate('bathroom')">
-
                         조사
-
                     </button>
 
                 </div>
 
 
-                <div class="train-area">
+                <div class="train-card">
 
-                    <div class="area-icon">🧳</div>
+                    <div class="train-icon">🧳</div>
 
-                    <div class="area-name">
+                    <div class="train-name">
                         짐칸
                     </div>
 
-                    <div class="area-description">
-                        승객들의 짐이 보관된 공간.
+                    <div class="train-desc">
+                        승객들의 수하물이 보관되어 있다.
                     </div>
 
                     <button
-                        class="investigate-button"
+                        class="investigate"
                         onclick="investigate('luggage')">
-
                         조사
-
                     </button>
 
                 </div>
 
 
-                <div class="train-area">
+                <div class="train-card">
 
-                    <div class="area-icon">🪟</div>
+                    <div class="train-icon">🪟</div>
 
-                    <div class="area-name">
+                    <div class="train-name">
                         창가
                     </div>
 
-                    <div class="area-description">
-                        열차 밖을 확인할 수 있는 창문.
+                    <div class="train-desc">
+                        창문과 창가 주변을 확인할 수 있다.
                     </div>
 
                     <button
-                        class="investigate-button"
+                        class="investigate"
                         onclick="investigate('window')">
-
                         조사
-
                     </button>
 
                 </div>
 
 
-                <div class="train-area">
+                <div class="train-card">
 
-                    <div class="area-icon">🔗</div>
+                    <div class="train-icon">🔗</div>
 
-                    <div class="area-name">
+                    <div class="train-name">
                         객차 연결부
                     </div>
 
-                    <div class="area-description">
-                        다른 객차와 연결되는 통로.
+                    <div class="train-desc">
+                        다른 객차로 이어지는 연결 통로다.
                     </div>
 
                     <button
-                        class="investigate-button"
+                        class="investigate"
                         onclick="investigate('connection')">
-
                         조사
-
                     </button>
 
                 </div>
@@ -1265,35 +1155,25 @@ h1 {
 
     </div>
 
-</div>
+</section>
 
 
-<!-- ==================================================
-     NOTES
-================================================== -->
+<!-- =========================================================
+     추리 노트
+========================================================= -->
 
-<div id="notesScreen" class="investigation hidden">
+<section id="notesScreen" class="hidden">
 
     <div class="topbar">
-
-        <div class="logo">
-            SEARCH N GUESS
-        </div>
-
-        <div class="case-status">
-            CASE 01 // NOTES
-        </div>
-
+        <div class="logo">SEARCH N GUESS</div>
+        <div class="top-status">CASE 01 // NOTES</div>
     </div>
 
-
-    <div class="main">
+    <div class="layout">
 
         <aside class="sidebar">
 
-            <div class="sidebar-title">
-                CASE FILE
-            </div>
+            <div class="sidebar-title">CASE FILE</div>
 
             <button class="menu" onclick="showOverview()">
                 📁 사건 개요
@@ -1307,12 +1187,8 @@ h1 {
                 📷 증거물
             </button>
 
-            <button class="menu">
-                📋 기록
-            </button>
-
             <button class="menu" onclick="showTrain()">
-                🗺️ 열차
+                🚆 열차
             </button>
 
             <button class="menu active">
@@ -1321,38 +1197,36 @@ h1 {
 
         </aside>
 
-
         <main class="content">
 
             <h2>추리 노트</h2>
 
             <div class="subtitle">
-                발견한 사실과 추리를 자유롭게 기록하십시오.
+                사건에 대한 생각을 자유롭게 기록하십시오.
             </div>
 
             <textarea
                 id="notesArea"
-                class="notes-area"
+                class="notes"
                 placeholder="여기에 자유롭게 기록하십시오...
 
 예:
-23:40 — 승무원의 진술이 이상함
-승객 B의 이동 경로를 확인해야 함
-좌석 아래에서 발견된 가방과 관련이 있을지도 모름"></textarea>
+23:17 — 시계가 멈춰 있음
+승객 C의 증언과 시간표를 비교할 필요가 있음
+알렉스의 가방에서 무엇이 나왔는지 확인할 것"></textarea>
 
+            <div class="notes-bottom">
 
-            <div class="notes-footer">
-
-                <div id="saveStatus" class="save-status">
+                <div
+                    id="saveStatus"
+                    class="save-status">
                     자동 저장됨
                 </div>
 
                 <button
-                    class="clear-notes"
+                    class="clear-button"
                     onclick="clearNotes()">
-
                     전체 삭제
-
                 </button>
 
             </div>
@@ -1361,14 +1235,16 @@ h1 {
 
     </div>
 
-</div>
+</section>
 
 
-<!-- ==================================================
-     CUTSCENE
-================================================== -->
+<!-- =========================================================
+     조사 컷신
+========================================================= -->
 
-<div id="cutscene" class="cutscene hidden">
+<div
+    id="cutscene"
+    class="cutscene hidden">
 
     <div class="cutscene-inner">
 
@@ -1377,34 +1253,29 @@ h1 {
             class="cutscene-text">
         </div>
 
-
         <div
-            id="evidenceReveal"
-            class="evidence-reveal">
+            id="reveal"
+            class="reveal">
 
             <div
-                id="evidenceImage"
-                class="evidence-image">
-
-                증거 이미지
-
+                id="revealImage"
+                class="reveal-image">
+                [이미지 준비중]
             </div>
 
-            <div class="evidence-label">
+            <div class="reveal-label">
                 새로운 증거물
             </div>
 
             <div
-                id="evidenceTitle"
-                class="evidence-title">
+                id="revealTitle"
+                class="reveal-title">
             </div>
 
             <button
-                class="cutscene-button"
+                class="reveal-button"
                 onclick="closeCutscene()">
-
                 확인
-
             </button>
 
         </div>
@@ -1416,187 +1287,211 @@ h1 {
 
 <script>
 
-
-/* ==================================================
-   증거물 데이터
-================================================== */
+/* =========================================================
+   증거 데이터
+========================================================= */
 
 const evidenceData = {
 
-    1: {
-        name: "알렉스의 승차권",
-        location: "좌석 구역",
-        text: "좌석 아래에서 승차권 한 장이 발견되었다.",
-        image: "증거 이미지 01"
-    },
+1: {
+    name: "알렉스의 승차권",
+    location: "좌석 구역",
+    cutscene: "좌석 옆에서 승차권 한 장이 발견되었다.",
+    detail: "알렉스 모건 명의로 발권된 승차권이다. 탑승 날짜와 목적지가 기록되어 있으며, 특별한 훼손은 보이지 않는다.",
+    clue: "알렉스가 해당 열차에 정상적으로 탑승했다는 사실을 확인할 수 있다."
+},
 
-    2: {
-        name: "알렉스의 검은 가방",
-        location: "좌석 구역",
-        text: "의자 아래에 작은 검은 가방이 보인다.",
-        image: "증거 이미지 02"
-    },
+2: {
+    name: "알렉스의 검은 가방",
+    location: "좌석 구역",
+    cutscene: "의자 아래에 작은 검은 가방이 보인다.",
+    detail: "검은색 소형 가방. 내부에는 개인적인 물품 몇 가지가 들어 있지만, 특별히 눈에 띄는 물건은 없다.",
+    clue: "가방이 좌석 아래에 남아 있었다는 점이 확인된다."
+},
 
-    3: {
-        name: "찢어진 메모",
-        location: "좌석 구역",
-        text: "좌석 틈에서 종이 조각 하나가 발견되었다.",
-        image: "증거 이미지 03"
-    },
+3: {
+    name: "찢어진 메모",
+    location: "좌석 구역",
+    cutscene: "좌석 틈 사이에서 종이 조각 하나가 보인다.",
+    detail: "종이의 일부만 남아 있어 전체 내용을 확인하기 어렵다. 짧은 문장 일부와 숫자로 보이는 흔적이 있다.",
+    clue: "내용 일부만으로는 의미를 확정하기 어렵다."
+},
 
-    4: {
-        name: "멈춰 있는 손목시계",
-        location: "좌석 구역",
-        text: "좌석 밑에서 멈춰 있는 손목시계가 발견되었다.",
-        image: "증거 이미지 04"
-    },
+4: {
+    name: "멈춰 있는 손목시계",
+    location: "좌석 구역",
+    cutscene: "좌석 아래에서 손목시계 하나가 발견되었다.",
+    detail: "시계는 23시 17분을 가리킨 채 멈춰 있다. 겉면에 눈에 띄는 파손은 없다.",
+    clue: "23시 17분이라는 특정 시간이 기록되어 있다."
+},
 
-    5: {
-        name: "좌석 밑 영수증",
-        location: "좌석 구역",
-        text: "오래된 영수증 한 장이 떨어져 있다.",
-        image: "증거 이미지 05"
-    },
+5: {
+    name: "좌석 밑 영수증",
+    location: "좌석 구역",
+    cutscene: "좌석 밑에서 접힌 영수증이 발견되었다.",
+    detail: "열차 안에서 구매한 것으로 보이는 물품의 영수증이다. 발급 시간이 적혀 있다.",
+    clue: "사건 당시의 시간대를 추정하는 데 사용할 수 있다."
+},
 
-    6: {
-        name: "승객 B의 승차권",
-        location: "좌석 구역",
-        text: "다른 승객의 승차권이 발견되었다.",
-        image: "증거 이미지 06"
-    },
+6: {
+    name: "승객 B의 승차권",
+    location: "좌석 구역",
+    cutscene: "좌석 틈에서 다른 사람의 승차권이 발견되었다.",
+    detail: "승객 B 명의의 승차권. 알렉스의 좌석과 가까운 구역의 좌석 번호가 적혀 있다.",
+    clue: "B가 알렉스와 가까운 위치에 있었다는 사실을 확인할 수 있다."
+},
 
-    7: {
-        name: "승객 B의 손수건",
-        location: "좌석 구역",
-        text: "알렉스의 좌석 근처에서 손수건 하나가 발견되었다.",
-        image: "증거 이미지 07"
-    },
+7: {
+    name: "승객 B의 손수건",
+    location: "좌석 구역",
+    cutscene: "알렉스의 좌석 근처에서 손수건 하나가 발견되었다.",
+    detail: "손수건에는 작은 이니셜이 새겨져 있다. 승객 B가 가지고 있던 물건과 비슷해 보인다.",
+    clue: "B의 물건일 가능성이 있지만, 이것만으로 소유자를 확정할 수는 없다."
+},
 
-    8: {
-        name: "빈 음료수 캔",
-        location: "좌석 구역",
-        text: "누군가 마신 것으로 보이는 음료수 캔이다.",
-        image: "증거 이미지 08"
-    },
+8: {
+    name: "빈 음료수 캔",
+    location: "좌석 구역",
+    cutscene: "테이블 아래에서 빈 음료수 캔이 발견되었다.",
+    detail: "두 개의 음료수 캔 중 하나다. 구매 시간은 확인되지만 누가 마셨는지는 알 수 없다.",
+    clue: "사건 전후에 누군가 해당 좌석 주변에 있었을 가능성을 보여준다."
+},
 
-    9: {
-        name: "객차 시간표",
-        location: "출입문",
-        text: "7호차의 운행 시간이 기록되어 있다.",
-        image: "증거 이미지 09"
-    },
+9: {
+    name: "객차 시간표",
+    location: "출입문",
+    cutscene: "출입문 옆에 붙은 시간표가 눈에 들어온다.",
+    detail: "7호차가 각 역을 통과하는 시간이 표시되어 있다. 사건 당시의 열차 위치를 확인하는 데 사용할 수 있다.",
+    clue: "다른 시간 관련 증거와 비교할 수 있다."
+},
 
-    10: {
-        name: "출입문 상태 기록",
-        location: "출입문",
-        text: "출입문에 관한 기록을 확인할 수 있다.",
-        image: "증거 이미지 10"
-    },
+10: {
+    name: "출입문 상태 기록",
+    location: "출입문",
+    cutscene: "출입문 옆 기록 장치에 남은 자료가 발견되었다.",
+    detail: "특정 시간대에 출입문이 열리고 닫힌 기록이 남아 있다.",
+    clue: "누군가 객차를 이동했을 가능성을 판단하는 데 사용할 수 있다."
+},
 
-    11: {
-        name: "열차 안내 방송 기록",
-        location: "출입문",
-        text: "특정 시각의 안내 방송 기록이 남아 있다.",
-        image: "증거 이미지 11"
-    },
+11: {
+    name: "열차 안내 방송 기록",
+    location: "출입문",
+    cutscene: "안내 방송 장치에 이전 방송 기록이 남아 있다.",
+    detail: "사건 당시 방송된 안내 내용과 방송 시각이 기록되어 있다.",
+    clue: "목격자의 시간 진술을 검증하는 데 사용할 수 있다."
+},
 
-    12: {
-        name: "바닥의 작은 흠집",
-        location: "출입문",
-        text: "바닥에 무언가 끌린 듯한 흔적이 있다.",
-        image: "증거 이미지 12"
-    },
+12: {
+    name: "바닥의 작은 흠집",
+    location: "출입문",
+    cutscene: "바닥에서 평소와 다른 작은 흠집이 발견되었다.",
+    detail: "출입문 주변 바닥에 길게 긁힌 흔적이 있다. 무엇에 의해 생긴 것인지는 확인되지 않았다.",
+    clue: "누군가 물건을 이동시켰을 가능성을 생각해 볼 수 있다."
+},
 
-    13: {
-        name: "버려진 장갑",
-        location: "화장실",
-        text: "화장실에서 장갑 한 짝이 발견되었다.",
-        image: "증거 이미지 13"
-    },
+13: {
+    name: "버려진 장갑",
+    location: "화장실",
+    cutscene: "화장실 구석에서 장갑 한 짝이 발견되었다.",
+    detail: "검은색 장갑 한 짝. 겉보기에는 평범한 장갑이며, 특정 인물의 것이라고 단정할 만한 표시가 없다.",
+    clue: "화장실에 누군가 있었음을 보여주는 정도의 단서다."
+},
 
-    14: {
-        name: "세면대의 물기",
-        location: "화장실",
-        text: "세면대에 아직 마르지 않은 물기가 남아 있다.",
-        image: "증거 이미지 14"
-    },
+14: {
+    name: "세면대의 물기",
+    location: "화장실",
+    cutscene: "세면대에 아직 마르지 않은 물기가 남아 있다.",
+    detail: "세면대 주변이 최근 사용된 것으로 보인다. 정확히 언제 사용되었는지는 알 수 없다.",
+    clue: "사건 직전 화장실이 사용되었을 가능성이 있다."
+},
 
-    15: {
-        name: "휴지통 속 종이조각",
-        location: "화장실",
-        text: "휴지통에서 찢어진 종이 조각들이 발견되었다.",
-        image: "증거 이미지 15"
-    },
+15: {
+    name: "휴지통 속 종이조각",
+    location: "화장실",
+    cutscene: "휴지통 안에서 찢어진 종이 조각들이 보인다.",
+    detail: "몇 개의 종이 조각이 서로 다른 크기로 찢겨 있다. 일부에는 메모와 비슷한 글씨가 남아 있다.",
+    clue: "좌석에서 발견된 메모와 비교해볼 필요가 있다."
+},
 
-    16: {
-        name: "이름 없는 열쇠",
-        location: "화장실",
-        text: "정체를 알 수 없는 작은 열쇠가 발견되었다.",
-        image: "증거 이미지 16"
-    },
+16: {
+    name: "이름 없는 열쇠",
+    location: "화장실",
+    cutscene: "세면대 아래에서 작은 열쇠 하나가 발견되었다.",
+    detail: "열쇠에는 이름이나 번호가 표시되어 있지 않다. 어느 자물쇠에 사용되는지는 알 수 없다.",
+    clue: "7호차 어딘가에 열쇠와 관련된 장소가 있는지 확인할 필요가 있다."
+},
 
-    17: {
-        name: "낡은 여행가방",
-        location: "짐칸",
-        text: "오래된 여행가방 하나가 놓여 있다.",
-        image: "증거 이미지 17"
-    },
+17: {
+    name: "낡은 여행가방",
+    location: "짐칸",
+    cutscene: "짐칸 구석에 오래된 여행가방 하나가 놓여 있다.",
+    detail: "가방은 잠겨 있지 않으며 외부에는 오래 사용한 흔적이 있다. 소유자를 바로 확인하기는 어렵다.",
+    clue: "사건과 직접적인 관련이 있는지는 아직 알 수 없다."
+},
 
-    18: {
-        name: "수하물 태그",
-        location: "짐칸",
-        text: "가방에 붙어 있던 수하물 태그다.",
-        image: "증거 이미지 18"
-    },
+18: {
+    name: "수하물 태그",
+    location: "짐칸",
+    cutscene: "여행가방에 붙어 있던 수하물 태그가 보인다.",
+    detail: "태그에는 승객의 이름과 수하물 번호가 기록되어 있다. 열차 기록과 대조할 수 있다.",
+    clue: "짐의 소유자와 이동 경로를 확인하는 데 사용할 수 있다."
+},
 
-    19: {
-        name: "알렉스의 작은 사진",
-        location: "짐칸",
-        text: "알렉스가 찍힌 작은 사진 한 장이 발견되었다.",
-        image: "증거 이미지 19"
-    },
+19: {
+    name: "알렉스의 작은 사진",
+    location: "짐칸",
+    cutscene: "여행가방 안쪽에서 작은 사진 한 장이 발견되었다.",
+    detail: "사진에는 알렉스가 찍혀 있다. 사진의 다른 부분은 오래되어 흐릿하다.",
+    clue: "사진 속 인물과 장소에 대한 추가 조사가 필요하다.",
+    chapter2: true
+},
 
-    20: {
-        name: "창문에 남은 손자국",
-        location: "창가",
-        text: "창문에 희미한 손자국이 남아 있다.",
-        image: "증거 이미지 20"
-    },
+20: {
+    name: "창문에 남은 손자국",
+    location: "창가",
+    cutscene: "창문에 희미한 손자국이 남아 있는 것이 보인다.",
+    detail: "창문 안쪽에 손바닥 모양의 흔적이 있다. 흔적이 언제 생겼는지는 알 수 없다.",
+    clue: "사건 당시 창가에 누군가 있었을 가능성을 보여준다."
+},
 
-    21: {
-        name: "창밖 풍경 사진",
-        location: "창가",
-        text: "누군가 촬영한 것으로 보이는 사진이다.",
-        image: "증거 이미지 21"
-    },
+21: {
+    name: "창밖 풍경 사진",
+    location: "창가",
+    cutscene: "창가에서 작은 사진 파일 하나가 발견되었다.",
+    detail: "열차에서 촬영된 것으로 보이는 풍경 사진이다. 촬영 시각 정보가 일부 남아 있다.",
+    clue: "사진의 촬영 시각을 다른 시간 관련 증거와 비교할 수 있다."
+},
 
-    22: {
-        name: "객차 연결부의 발자국",
-        location: "객차 연결부",
-        text: "연결부 바닥에서 발자국 흔적이 발견되었다.",
-        image: "증거 이미지 22"
-    },
+22: {
+    name: "객차 연결부의 발자국",
+    location: "객차 연결부",
+    cutscene: "연결부 바닥에 희미한 발자국이 보인다.",
+    detail: "여러 종류의 발자국이 겹쳐 있어 정확한 인원을 파악하기 어렵다.",
+    clue: "사건 당시 연결부를 이용한 사람이 있었을 가능성이 있다."
+},
 
-    23: {
-        name: "찢어진 옷감 조각",
-        location: "객차 연결부",
-        text: "객차 연결부에 옷감 조각 하나가 걸려 있다.",
-        image: "증거 이미지 23"
-    },
+23: {
+    name: "찢어진 옷감 조각",
+    location: "객차 연결부",
+    cutscene: "문틈에 작은 옷감 조각이 걸려 있다.",
+    detail: "짙은 색상의 옷감 일부다. 일반적인 의류 소재로 보이며 특정 인물의 옷이라고 바로 단정할 수 없다.",
+    clue: "인물들의 옷차림이나 소지품과 비교할 필요가 있다."
+},
 
-    24: {
-        name: "승객 B의 진술 기록",
-        location: "기록 자료",
-        text: "승객 B가 사건 당시의 상황에 대해 남긴 진술이다.",
-        image: "증거 이미지 24"
-    }
+24: {
+    name: "승객 B의 진술 기록",
+    location: "기록 자료",
+    cutscene: "승객 B가 사건 당시 상황에 대해 남긴 진술이 발견되었다.",
+    detail: "B는 사건이 발생한 시간대에 대부분의 시간을 자신의 좌석에서 보냈다고 진술했다. 다만 일부 시간대의 설명은 구체적이지 않다.",
+    clue: "다른 시간 관련 증거와 비교할 필요가 있다."
+}
 
 };
 
 
-/* ==================================================
-   장소별 증거 연결
-================================================== */
+/* =========================================================
+   장소별 증거
+========================================================= */
 
 const locationEvidence = {
 
@@ -1615,31 +1510,157 @@ const locationEvidence = {
 };
 
 
-/* ==================================================
-   저장된 증거 가져오기
-================================================== */
+/* =========================================================
+   화면 관리
+========================================================= */
+
+const screens = [
+    "startScreen",
+    "overviewScreen",
+    "peopleScreen",
+    "evidenceScreen",
+    "detailScreen",
+    "trainScreen",
+    "notesScreen"
+];
+
+function hideAllScreens() {
+
+    screens.forEach(id => {
+
+        document
+            .getElementById(id)
+            .classList.add("hidden");
+
+    });
+
+}
+
+function showScreen(id) {
+
+    hideAllScreens();
+
+    document
+        .getElementById(id)
+        .classList.remove("hidden");
+
+    updateProgress();
+
+}
+
+
+/* =========================================================
+   네비게이션
+========================================================= */
+
+function showIntro() {
+
+    localStorage.setItem(
+        "introSeen",
+        "true"
+    );
+
+    showOverview();
+
+}
+
+
+function showOverview() {
+
+    localStorage.setItem(
+        "currentScreen",
+        "overviewScreen"
+    );
+
+    showScreen("overviewScreen");
+
+}
+
+
+function showPeople() {
+
+    localStorage.setItem(
+        "currentScreen",
+        "peopleScreen"
+    );
+
+    showScreen("peopleScreen");
+
+}
+
+
+function showEvidence() {
+
+    localStorage.setItem(
+        "currentScreen",
+        "evidenceScreen"
+    );
+
+    showScreen("evidenceScreen");
+
+    renderEvidence();
+
+}
+
+
+function showTrain() {
+
+    localStorage.setItem(
+        "currentScreen",
+        "trainScreen"
+    );
+
+    showScreen("trainScreen");
+
+}
+
+
+function showNotes() {
+
+    localStorage.setItem(
+        "currentScreen",
+        "notesScreen"
+    );
+
+    showScreen("notesScreen");
+
+    loadNotes();
+
+}
+
+
+/* =========================================================
+   증거 저장
+========================================================= */
 
 function getFoundEvidence() {
 
     const saved =
-        localStorage.getItem("case01_evidence");
+        localStorage.getItem(
+            "case01_evidence"
+        );
 
     if (!saved) {
         return [];
     }
 
-    return JSON.parse(saved);
+    try {
+
+        return JSON.parse(saved);
+
+    } catch {
+
+        return [];
+
+    }
 
 }
 
 
-/* ==================================================
-   증거 저장
-================================================== */
+function saveEvidence(id) {
 
-function saveFoundEvidence(id) {
-
-    let found = getFoundEvidence();
+    const found =
+        getFoundEvidence();
 
     if (!found.includes(id)) {
 
@@ -1655,146 +1676,9 @@ function saveFoundEvidence(id) {
 }
 
 
-/* ==================================================
-   화면 숨기기
-================================================== */
-
-function hideAllScreens() {
-
-    document
-        .getElementById("startScreen")
-        .classList.add("hidden");
-
-    document
-        .getElementById("introScreen")
-        .classList.add("hidden");
-
-    document
-        .getElementById("investigationScreen")
-        .classList.add("hidden");
-
-    document
-        .getElementById("peopleScreen")
-        .classList.add("hidden");
-
-    document
-        .getElementById("evidenceScreen")
-        .classList.add("hidden");
-
-    document
-        .getElementById("trainScreen")
-        .classList.add("hidden");
-
-    document
-        .getElementById("notesScreen")
-        .classList.add("hidden");
-
-}
-
-
-/* ==================================================
-   화면 이동
-================================================== */
-
-function showScreen(id) {
-
-    hideAllScreens();
-
-    document
-        .getElementById(id)
-        .classList.remove("hidden");
-
-    updateProgress();
-
-}
-
-
-/* ==================================================
-   화면 저장
-================================================== */
-
-function saveScreen(id) {
-
-    localStorage.setItem(
-        "currentScreen",
-        id
-    );
-
-}
-
-
-/* ==================================================
-   네비게이션
-================================================== */
-
-function showIntro() {
-
-    saveScreen("introScreen");
-
-    showScreen("introScreen");
-
-}
-
-
-function openCase() {
-
-    saveScreen("investigationScreen");
-
-    showScreen("investigationScreen");
-
-}
-
-
-function showOverview() {
-
-    saveScreen("investigationScreen");
-
-    showScreen("investigationScreen");
-
-}
-
-
-function showPeople() {
-
-    saveScreen("peopleScreen");
-
-    showScreen("peopleScreen");
-
-}
-
-
-function showEvidence() {
-
-    saveScreen("evidenceScreen");
-
-    showScreen("evidenceScreen");
-
-    renderEvidence();
-
-}
-
-
-function showTrain() {
-
-    saveScreen("trainScreen");
-
-    showScreen("trainScreen");
-
-}
-
-
-function showNotes() {
-
-    saveScreen("notesScreen");
-
-    showScreen("notesScreen");
-
-}
-
-
-/* ==================================================
+/* =========================================================
    진행도
-================================================== */
+========================================================= */
 
 function updateProgress() {
 
@@ -1805,39 +1689,219 @@ function updateProgress() {
         (found / 24) * 100;
 
     const text =
-        document.getElementById("progressText");
+        document.getElementById(
+            "progressText"
+        );
 
     const fill =
-        document.getElementById("progressFill");
+        document.getElementById(
+            "progressFill"
+        );
 
     if (text) {
-
         text.textContent =
-            found + " / 24";
-
+            `${found} / 24`;
     }
 
     if (fill) {
-
         fill.style.width =
-            percent + "%";
-
+            `${percent}%`;
     }
 
 }
 
 
-/* ==================================================
-   증거물 페이지
-================================================== */
+/* =========================================================
+   열차 조사
+========================================================= */
+
+function investigate(location) {
+
+    const ids =
+        locationEvidence[location];
+
+    if (!ids) {
+        return;
+    }
+
+    const found =
+        getFoundEvidence();
+
+    const next =
+        ids.find(
+            id => !found.includes(id)
+        );
+
+
+    if (!next) {
+
+        emptyInvestigation();
+
+        return;
+
+    }
+
+    startCutscene(next);
+
+}
+
+
+/* =========================================================
+   컷신
+========================================================= */
+
+function startCutscene(id) {
+
+    const data =
+        evidenceData[id];
+
+    const cutscene =
+        document.getElementById(
+            "cutscene"
+        );
+
+    const text =
+        document.getElementById(
+            "cutsceneText"
+        );
+
+    const reveal =
+        document.getElementById(
+            "reveal"
+        );
+
+    const revealImage =
+        document.getElementById(
+            "revealImage"
+        );
+
+    const revealTitle =
+        document.getElementById(
+            "revealTitle"
+        );
+
+
+    cutscene.classList.remove(
+        "hidden"
+    );
+
+    text.style.display = "flex";
+
+    reveal.style.display = "none";
+
+    text.textContent =
+        data.cutscene;
+
+
+    setTimeout(() => {
+
+        text.style.display =
+            "none";
+
+        revealImage.textContent =
+            "[이미지 준비중]";
+
+        revealTitle.textContent =
+            `증거물 ${String(id).padStart(2, "0")} — ${data.name}`;
+
+        reveal.style.display =
+            "block";
+
+        saveEvidence(id);
+
+        updateProgress();
+
+    }, 1700);
+
+}
+
+
+/* =========================================================
+   증거가 없는 조사
+========================================================= */
+
+function emptyInvestigation() {
+
+    const cutscene =
+        document.getElementById(
+            "cutscene"
+        );
+
+    const text =
+        document.getElementById(
+            "cutsceneText"
+        );
+
+    const reveal =
+        document.getElementById(
+            "reveal"
+        );
+
+
+    cutscene.classList.remove(
+        "hidden"
+    );
+
+    reveal.style.display =
+        "none";
+
+    text.style.display =
+        "flex";
+
+    text.textContent =
+        "주변을 자세히 살펴봤지만, 특별한 것은 발견되지 않았다.";
+
+
+    setTimeout(() => {
+
+        closeCutscene();
+
+    }, 1600);
+
+}
+
+
+/* =========================================================
+   컷신 닫기
+========================================================= */
+
+function closeCutscene() {
+
+    document
+        .getElementById("cutscene")
+        .classList.add("hidden");
+
+    document
+        .getElementById("reveal")
+        .style.display = "none";
+
+    document
+        .getElementById("cutsceneText")
+        .style.display = "flex";
+
+    renderEvidence();
+
+}
+
+
+/* =========================================================
+   증거 목록
+========================================================= */
 
 function renderEvidence() {
 
     const list =
-        document.getElementById("evidenceList");
+        document.getElementById(
+            "evidenceList"
+        );
+
+    if (!list) {
+        return;
+    }
 
     const found =
-        getFoundEvidence();
+        getFoundEvidence()
+            .sort((a, b) => a - b);
 
     list.innerHTML = "";
 
@@ -1856,226 +1920,165 @@ function renderEvidence() {
     }
 
 
-    found
-        .sort((a, b) => a - b)
-        .forEach(id => {
+    found.forEach(id => {
 
-            const evidence =
-                evidenceData[id];
+        const data =
+            evidenceData[id];
 
-            const item =
-                document.createElement("div");
+        const card =
+            document.createElement(
+                "div"
+            );
 
-            item.className =
-                "evidence-item";
+        card.className =
+            "evidence-card";
 
-            item.innerHTML = `
+        card.innerHTML = `
 
-                <div class="evidence-number">
+            <div class="evidence-card-info">
+
+                <div class="evidence-id">
                     EVIDENCE ${String(id).padStart(2, "0")}
                 </div>
 
                 <div class="evidence-name">
-                    ${evidence.name}
+                    ${data.name}
                 </div>
 
                 <div class="evidence-location">
-                    발견 위치 : ${evidence.location}
+                    발견 위치 : ${data.location}
                 </div>
 
-            `;
+            </div>
 
-            list.appendChild(item);
+            <button
+                class="detail-button"
+                onclick="showEvidenceDetail(${id})">
 
-        });
+                상세보기 →
+
+            </button>
+        `;
+
+        list.appendChild(card);
+
+    });
 
 }
 
 
-/* ==================================================
-   조사 시작
-================================================== */
+/* =========================================================
+   증거 상세보기
+========================================================= */
 
-function investigate(location) {
-
-    const evidenceIds =
-        locationEvidence[location];
-
-    if (!evidenceIds) {
-        return;
-    }
-
-
-    /*
-       아직 발견하지 않은 첫 번째 증거를 찾는다.
-    */
+function showEvidenceDetail(id) {
 
     const found =
         getFoundEvidence();
 
-    const nextEvidence =
-        evidenceIds.find(
-            id => !found.includes(id)
+    if (!found.includes(id)) {
+        return;
+    }
+
+    const data =
+        evidenceData[id];
+
+    const detail =
+        document.getElementById(
+            "detailContent"
         );
 
 
-    /*
-       해당 장소의 증거를 모두 찾았다면
-       간단한 조사 결과만 보여준다.
-    */
+    detail.innerHTML = `
 
-    if (!nextEvidence) {
+        <div class="detail-image">
+            [이미지 준비중]
+        </div>
 
-        startEmptyInvestigation(location);
+        <div class="detail-number">
+            EVIDENCE ${String(id).padStart(2, "0")}
+        </div>
 
-        return;
+        <div class="detail-title">
+            ${data.name}
+        </div>
 
-    }
+        <div class="panel">
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    발견 위치
+                </div>
+
+                <div class="detail-value">
+                    ${data.location}
+                </div>
+
+            </div>
 
 
-    startInvestigationCutscene(
-        nextEvidence
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    관찰 기록
+                </div>
+
+                <div class="detail-value">
+                    ${data.detail}
+                </div>
+
+            </div>
+
+
+            <div class="detail-row">
+
+                <div class="detail-label">
+                    확인된 단서
+                </div>
+
+                <div class="detail-value">
+                    ${data.clue}
+                </div>
+
+            </div>
+
+        </div>
+
+        <button
+            class="back-button"
+            onclick="showEvidence()">
+
+            ← 증거물 목록으로
+
+        </button>
+
+    `;
+
+
+    localStorage.setItem(
+        "currentScreen",
+        "detailScreen"
     );
 
-}
-
-
-/* ==================================================
-   조사 컷신
-================================================== */
-
-function startInvestigationCutscene(id) {
-
-    const evidence =
-        evidenceData[id];
-
-    const cutscene =
-        document.getElementById("cutscene");
-
-    const text =
-        document.getElementById("cutsceneText");
-
-    const reveal =
-        document.getElementById("evidenceReveal");
-
-    const image =
-        document.getElementById("evidenceImage");
-
-    const title =
-        document.getElementById("evidenceTitle");
-
-
-    cutscene.classList.remove("hidden");
-
-    reveal.style.display = "none";
-
-    text.style.display = "flex";
-
-
-    /*
-       첫 번째 문장
-    */
-
-    text.textContent =
-        evidence.text;
-
-
-    /*
-       잠시 후 증거 공개
-    */
-
-    setTimeout(() => {
-
-        text.style.display = "none";
-
-        image.textContent =
-            evidence.image;
-
-        title.textContent =
-            `증거물 ${String(id).padStart(2, "0")} — ${evidence.name}`;
-
-        reveal.style.display =
-            "block";
-
-        saveFoundEvidence(id);
-
-        updateProgress();
-
-    }, 1800);
+    showScreen("detailScreen");
 
 }
 
 
-/* ==================================================
-   더 이상 증거가 없는 장소
-================================================== */
-
-function startEmptyInvestigation(location) {
-
-    const cutscene =
-        document.getElementById("cutscene");
-
-    const text =
-        document.getElementById("cutsceneText");
-
-    const reveal =
-        document.getElementById("evidenceReveal");
-
-
-    cutscene.classList.remove("hidden");
-
-    reveal.style.display = "none";
-
-    text.style.display = "flex";
-
-
-    text.textContent =
-        "주변을 자세히 살펴봤지만, 특별한 것은 발견되지 않았다.";
-
-
-    setTimeout(() => {
-
-        closeCutscene();
-
-    }, 1800);
-
-}
-
-
-/* ==================================================
-   컷신 종료
-================================================== */
-
-function closeCutscene() {
-
-    document
-        .getElementById("cutscene")
-        .classList.add("hidden");
-
-    document
-        .getElementById("evidenceReveal")
-        .style.display = "none";
-
-    document
-        .getElementById("cutsceneText")
-        .style.display = "flex";
-
-    renderEvidence();
-
-    updateProgress();
-
-}
-
-
-/* ==================================================
+/* =========================================================
    추리 노트
-================================================== */
+========================================================= */
 
 const notesArea =
-    document.getElementById("notesArea");
+    document.getElementById(
+        "notesArea"
+    );
 
 const saveStatus =
-    document.getElementById("saveStatus");
+    document.getElementById(
+        "saveStatus"
+    );
 
 
 notesArea.addEventListener(
@@ -2097,7 +2100,9 @@ notesArea.addEventListener(
 function loadNotes() {
 
     const saved =
-        localStorage.getItem("case01_notes");
+        localStorage.getItem(
+            "case01_notes"
+        );
 
     if (saved !== null) {
 
@@ -2119,7 +2124,6 @@ function clearNotes() {
         return;
     }
 
-
     notesArea.value = "";
 
     localStorage.removeItem(
@@ -2132,9 +2136,9 @@ function clearNotes() {
 }
 
 
-/* ==================================================
-   시작 시 데이터 불러오기
-================================================== */
+/* =========================================================
+   페이지 시작
+========================================================= */
 
 window.addEventListener(
     "DOMContentLoaded",
@@ -2144,19 +2148,19 @@ window.addEventListener(
 
         updateProgress();
 
-        const savedScreen =
+
+        const saved =
             localStorage.getItem(
                 "currentScreen"
             );
 
 
-        if (savedScreen) {
+        if (saved && screens.includes(saved)) {
 
-            showScreen(savedScreen);
+            showScreen(saved);
 
             if (
-                savedScreen ===
-                "evidenceScreen"
+                saved === "evidenceScreen"
             ) {
 
                 renderEvidence();
