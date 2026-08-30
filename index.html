@@ -1,368 +1,591 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CASE 01</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>UNSEEN</title>
 
 <style>
 *{box-sizing:border-box}
 
 body{
-margin:0;
-background:#090b0d;
-color:#eee;
-font-family:Arial,sans-serif
+    margin:0;
+    background:#080909;
+    color:#e8e5dc;
+    font-family:Georgia,"Times New Roman",serif;
 }
 
 button{
-cursor:pointer;
-font:inherit
+    cursor:pointer;
+    font:inherit;
 }
 
-.hidden{display:none!important}
+.hidden{
+    display:none!important;
+}
+
+/* =========================
+   공통 화면
+========================= */
 
 .screen{
-min-height:100vh
+    width:100vw;
+    min-height:100vh;
+    position:relative;
+    background:
+        radial-gradient(
+            ellipse at center,
+            #252522 0%,
+            #111210 45%,
+            #070807 100%
+        );
 }
 
-.start{
-display:grid;
-place-items:center;
-padding:24px
+.screen::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.015) 0px,
+            rgba(255,255,255,.015) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+    pointer-events:none;
 }
 
-.startbox{
-width:min(700px,100%);
-border:1px solid #444;
-background:#111;
-padding:50px 30px;
-text-align:center
+/* =========================
+   장식
+========================= */
+
+.corner{
+    position:absolute;
+    width:35px;
+    height:35px;
+    border-color:#45443f;
+    border-style:solid;
+    opacity:.6;
 }
 
-.startbox h1{
-font-size:54px;
-letter-spacing:7px;
-margin:10px 0 20px
+.tl{
+    top:25px;
+    left:25px;
+    border-width:1px 0 0 1px;
 }
 
-.muted{
-color:#777
+.tr{
+    top:25px;
+    right:25px;
+    border-width:1px 1px 0 0;
 }
 
-.btn{
-padding:12px 22px;
-background:transparent;
-color:#eee;
-border:1px solid #666
+.bl{
+    bottom:25px;
+    left:25px;
+    border-width:0 0 1px 1px;
 }
 
-.btn:hover{
-background:#eee;
-color:#111
+.br{
+    bottom:25px;
+    right:25px;
+    border-width:0 1px 1px 0;
 }
 
-.top{
-height:60px;
-border-bottom:1px solid #333;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 22px;
-background:#0d0f11
+/* =========================
+   메인 타이틀
+========================= */
+
+#mainScreen{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 }
 
-.logo{
-letter-spacing:3px;
-font-size:13px
+.main-container{
+    position:relative;
+    width:min(650px,90%);
+    text-align:center;
 }
 
-.layout{
-display:flex;
-min-height:calc(100vh - 60px)
+.case-label{
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:6px;
+    color:#77766f;
+    margin-bottom:35px;
 }
 
-aside{
-width:200px;
-border-right:1px solid #333;
-padding:12px;
-background:#0d0f11
+.title{
+    font-size:clamp(65px,12vw,125px);
+    letter-spacing:18px;
+    font-weight:normal;
+    margin:0;
+    text-shadow:0 0 20px rgba(255,255,255,.08);
 }
 
-.menu{
-width:100%;
-padding:13px 10px;
-text-align:left;
-background:transparent;
-color:#888;
-border:0;
-border-bottom:1px solid #222
-}
-
-.menu:hover,
-.menu.active{
-background:#191c1f;
-color:#fff
-}
-
-main{
-width:min(1100px,100%);
-padding:34px
+.line{
+    width:230px;
+    height:1px;
+    background:#68665e;
+    margin:28px auto;
 }
 
 .subtitle{
-color:#666;
-font-size:12px;
-margin:8px 0 25px
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:5px;
+    color:#88877f;
+}
+
+.menu{
+    width:240px;
+    margin:10px auto;
+    padding:13px 20px;
+    background:transparent;
+    border:1px solid #4d4c47;
+    color:#d8d5cc;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:3px;
+    transition:.25s;
+}
+
+.menu:hover{
+    background:#e5e1d7;
+    color:#111;
+    border-color:#e5e1d7;
+}
+
+.version{
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:3px;
+    color:#4f4e49;
+}
+
+/* =========================
+   챕터 선택
+========================= */
+
+#chapterScreen{
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+
+.chapter-container{
+    width:min(700px,90%);
+    text-align:center;
+}
+
+.chapter-title{
+    font-size:38px;
+    letter-spacing:8px;
+    font-weight:normal;
+    margin-bottom:10px;
+}
+
+.chapter-subtitle{
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:4px;
+    color:#77766f;
+    margin-bottom:45px;
+}
+
+.chapter-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:center;
+}
+
+.chapter-button{
+    width:min(500px,100%);
+    padding:20px;
+    background:#111416;
+    border:1px solid #41413d;
+    color:#ddd9cf;
+    text-align:left;
+    transition:.25s;
+}
+
+.chapter-button:hover{
+    background:#e5e1d7;
+    color:#111;
+    border-color:#e5e1d7;
+}
+
+.chapter-number{
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:3px;
+    color:#77766f;
+}
+
+.chapter-name{
+    margin-top:8px;
+    font-size:19px;
+    letter-spacing:3px;
+}
+
+.locked{
+    opacity:.35;
+}
+
+.locked:hover{
+    background:#111416;
+    color:#ddd9cf;
+    border-color:#41413d;
+}
+
+.back{
+    margin-top:35px;
+    background:transparent;
+    border:0;
+    color:#77766f;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:3px;
+}
+
+.back:hover{
+    color:#fff;
+}
+
+/* =========================
+   게임 화면
+========================= */
+
+#gameScreen{
+    display:none;
+    min-height:100vh;
+    background:#090b0d;
+}
+
+.top{
+    height:60px;
+    border-bottom:1px solid #333;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 22px;
+    background:#0d0f11;
+}
+
+.logo{
+    letter-spacing:3px;
+    font-size:13px;
+}
+
+.muted{
+    color:#777;
+}
+
+.layout{
+    display:flex;
+    min-height:calc(100vh - 60px);
+}
+
+aside{
+    width:200px;
+    border-right:1px solid #333;
+    padding:12px;
+    background:#0d0f11;
+}
+
+.menu-side{
+    width:100%;
+    padding:13px 10px;
+    text-align:left;
+    background:transparent;
+    color:#888;
+    border:0;
+    border-bottom:1px solid #222;
+}
+
+.menu-side:hover,
+.menu-side.active{
+    background:#191c1f;
+    color:#fff;
+}
+
+main{
+    width:min(1100px,100%);
+    padding:34px;
 }
 
 h2{
-letter-spacing:3px
+    letter-spacing:3px;
+}
+
+.subtitle2{
+    color:#666;
+    font-size:12px;
+    margin:8px 0 25px;
 }
 
 .panel,
 .card{
-border:1px solid #333;
-background:#111416;
-padding:22px;
-margin-bottom:15px
-}
-
-.goal{
-border-color:#555
-}
-
-.label{
-font-size:10px;
-letter-spacing:2px;
-color:#666;
-margin-bottom:9px
-}
-
-.text{
-line-height:1.9;
-color:#aaa;
-font-size:13px
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:13px
+    border:1px solid #333;
+    background:#111416;
+    padding:22px;
+    margin-bottom:15px;
 }
 
 .card{
-margin:0;
-cursor:pointer
+    cursor:pointer;
 }
 
 .card:hover{
-border-color:#666;
-background:#171a1c
+    border-color:#666;
+    background:#171a1c;
 }
 
-.name{
-font-size:17px;
-margin:7px 0
+.label{
+    font-size:10px;
+    letter-spacing:2px;
+    color:#666;
+    margin-bottom:9px;
 }
 
-.small{
-font-size:11px;
-color:#666
-}
-
-.progress{
-margin-top:18px
-}
-
-.bar{
-height:6px;
-background:#25282a
-}
-
-.fill{
-height:100%;
-width:0;
-background:#ddd
-}
-
-.evidence{
-display:flex;
-justify-content:space-between;
-gap:15px;
-align-items:center
-}
-
-.detail{
-padding:9px 14px;
-border:1px solid #444;
-background:transparent;
-color:#aaa
-}
-
-.detail:hover{
-background:#eee;
-color:#111
-}
-
-.empty{
-text-align:center;
-padding:45px;
-color:#666;
-border:1px solid #333;
-background:#111416;
-line-height:2
-}
-
-textarea{
-width:100%;
-background:#0c0e10;
-color:#ddd;
-border:1px solid #444;
-padding:16px;
-resize:vertical;
-font-family:inherit;
-outline:0
-}
-
-.notes{
-height:420px
-}
-
-.personnote{
-height:160px
-}
-
-.question{
-width:100%;
-text-align:left;
-background:#0d0f11;
-color:#aaa;
-border:1px solid #3b3e40;
-padding:12px;
-margin:5px 0
-}
-
-.question:hover{
-color:#fff;
-border-color:#777
-}
-
-.question.locked{
-opacity:.4;
-cursor:not-allowed
-}
-
-.answer{
-border:1px solid #444;
-padding:18px;
-margin-top:12px;
-color:#bbb;
-line-height:1.8
-}
-
-.back{
-margin-top:20px;
-padding:10px 16px;
-background:transparent;
-border:1px solid #444;
-color:#aaa
-}
-
-.cut{
-position:fixed;
-inset:0;
-background:#000;
-display:grid;
-place-items:center;
-z-index:20;
-padding:25px
-}
-
-.cutin{
-width:min(650px,100%);
-text-align:center
-}
-
-.cuttext{
-font-size:18px;
-line-height:2;
-min-height:100px
-}
-
-.reveal{
-display:none
-}
-
-.fakeimg{
-height:270px;
-border:1px solid #333;
-display:grid;
-place-items:center;
-color:#555;
-margin-bottom:22px
-}
-
-.finalbox{
-border:1px solid #555;
-padding:25px;
-background:#111416;
-margin-bottom:18px
-}
-
-.select{
-width:100%;
-padding:13px;
-background:#0d0f11;
-color:#ddd;
-border:1px solid #444;
-margin-top:8px
-}
-
-.result{
-padding:25px;
-border:1px solid #555;
-line-height:2;
-background:#111416
-}
-
-@media(max-width:700px){
-
-.layout{
-display:block
-}
-
-aside{
-width:100%;
-display:flex;
-overflow:auto
-}
-
-.menu{
-min-width:105px;
-text-align:center;
-border:0
-}
-
-main{
-padding:22px 15px
+.text{
+    line-height:1.9;
+    color:#aaa;
+    font-size:13px;
 }
 
 .grid{
-grid-template-columns:1fr
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
 }
 
-.startbox h1{
-font-size:40px
+.name{
+    font-size:17px;
+    margin:7px 0;
 }
+
+.small{
+    font-size:11px;
+    color:#666;
+}
+
+/* =========================
+   진행도
+========================= */
+
+.progress{
+    margin-top:18px;
+}
+
+.bar{
+    height:6px;
+    background:#25282a;
+}
+
+.fill{
+    height:100%;
+    background:#ddd;
+}
+
+/* =========================
+   증거
+========================= */
 
 .evidence{
-display:block
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
 }
 
 .detail{
-margin-top:12px
+    padding:9px 14px;
+    border:1px solid #444;
+    background:transparent;
+    color:#aaa;
 }
+
+.detail:hover{
+    background:#eee;
+    color:#111;
+}
+
+.empty{
+    text-align:center;
+    padding:45px;
+    color:#666;
+    border:1px solid #333;
+    background:#111416;
+    line-height:2;
+}
+
+.fakeimg{
+    height:270px;
+    border:1px solid #333;
+    display:grid;
+    place-items:center;
+    color:#555;
+    margin-bottom:22px;
+}
+
+/* =========================
+   메모
+========================= */
+
+textarea{
+    width:100%;
+    background:#0c0e10;
+    color:#ddd;
+    border:1px solid #444;
+    padding:16px;
+    resize:vertical;
+    font-family:inherit;
+    outline:0;
+}
+
+.notes{
+    height:420px;
+}
+
+.personnote{
+    height:160px;
+}
+
+/* =========================
+   질문
+========================= */
+
+.question{
+    width:100%;
+    text-align:left;
+    background:#0d0f11;
+    color:#aaa;
+    border:1px solid #3b3e40;
+    padding:12px;
+    margin:5px 0;
+}
+
+.question:hover{
+    color:#fff;
+    border-color:#777;
+}
+
+.question.locked{
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+.answer{
+    border:1px solid #444;
+    padding:18px;
+    margin-top:12px;
+    color:#bbb;
+    line-height:1.8;
+}
+
+/* =========================
+   조사 컷신
+========================= */
+
+.cut{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:grid;
+    place-items:center;
+    z-index:20;
+    padding:25px;
+}
+
+.cutin{
+    width:min(650px,100%);
+    text-align:center;
+}
+
+.cuttext{
+    font-size:18px;
+    line-height:2;
+    min-height:100px;
+}
+
+.reveal{
+    display:none;
+}
+
+/* =========================
+   최종 추리
+========================= */
+
+.finalbox{
+    border:1px solid #555;
+    padding:25px;
+    background:#111416;
+    margin-bottom:18px;
+}
+
+.select{
+    width:100%;
+    padding:13px;
+    background:#0d0f11;
+    color:#ddd;
+    border:1px solid #444;
+    margin-top:8px;
+}
+
+.result{
+    padding:25px;
+    border:1px solid #555;
+    line-height:2;
+    background:#111416;
+    margin-top:20px;
+}
+
+/* =========================
+   모바일
+========================= */
+
+@media(max-width:700px){
+
+    .layout{
+        display:block;
+    }
+
+    aside{
+        width:100%;
+        display:flex;
+        overflow:auto;
+    }
+
+    .menu-side{
+        min-width:105px;
+        text-align:center;
+        border:0;
+    }
+
+    main{
+        padding:22px 15px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .evidence{
+        display:block;
+    }
+
+    .detail{
+        margin-top:12px;
+    }
 
 }
 </style>
@@ -370,52 +593,160 @@ margin-top:12px
 
 <body>
 
-<div id="start" class="screen start">
 
-<div class="startbox">
+<!-- =========================
+     메인 화면
+========================= -->
 
-<div class="muted">
-CASE DATABASE // ACCESS TERMINAL
+<div id="mainScreen" class="screen">
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="main-container">
+
+        <div class="case-label">
+            CASE DATABASE // 1998
+        </div>
+
+        <h1 class="title">
+            UNSEEN
+        </h1>
+
+        <div class="line"></div>
+
+        <div class="subtitle">
+            EVERY CLUE HIDES A TRUTH
+        </div>
+
+        <div style="margin-top:60px;">
+
+            <button
+                class="menu"
+                onclick="openChapters()">
+                GAME START
+            </button>
+
+            <button
+                class="menu"
+                onclick="caseRecords()">
+                CASE RECORDS
+            </button>
+
+            <button
+                class="menu"
+                onclick="settings()">
+                SETTINGS
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="version">
+        UNSEEN // v1.0
+    </div>
+
 </div>
 
-<div class="muted" style="margin-top:25px">
-CASE FILE
+
+<!-- =========================
+     챕터 선택
+========================= -->
+
+<div id="chapterScreen" class="screen">
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="chapter-container">
+
+        <div class="chapter-title">
+            CHAPTERS
+        </div>
+
+        <div class="chapter-subtitle">
+            SELECT INVESTIGATION
+        </div>
+
+        <div class="chapter-list">
+
+            <button
+                class="chapter-button"
+                onclick="startChapter1()">
+
+                <div class="chapter-number">
+                    CHAPTER 01
+                </div>
+
+                <div class="chapter-name">
+                    23:17
+                </div>
+
+            </button>
+
+            <button
+                class="chapter-button locked"
+                onclick="chapterNothing()">
+
+                <div class="chapter-number">
+                    CHAPTER 02
+                </div>
+
+                <div class="chapter-name">
+                    과거의 흔적　🔒
+                </div>
+
+            </button>
+
+            <button
+                class="chapter-button locked"
+                onclick="chapterNothing()">
+
+                <div class="chapter-number">
+                    CHAPTER 03
+                </div>
+
+                <div class="chapter-name">
+                    ???　🔒
+                </div>
+
+            </button>
+
+        </div>
+
+        <button
+            class="back"
+            onclick="backToMain()">
+
+            ← BACK
+
+        </button>
+
+    </div>
+
 </div>
 
-<h1>CASE 01</h1>
 
-<div class="muted">
-STATUS : UNSOLVED
-</div>
+<!-- =========================
+     게임 화면
+========================= -->
 
-<div class="panel" style="margin:30px 0">
-
-사건 번호 : 01<br>
-사건 발생일 : 1998. 11. 17<br>
-사건 장소 : 열차 7호차<br>
-사건 분류 : 실종
-
-</div>
-
-<button class="btn" onclick="overview()">
-사건 조사 시작
-</button>
-
-</div>
-</div>
-
-
-<div id="app" class="hidden">
+<div id="gameScreen">
 
 <header class="top">
 
-<div class="logo">
-SEARCH N GUESS
-</div>
+    <div class="logo">
+        UNSEEN
+    </div>
 
-<div class="muted">
-CASE 01 // UNSOLVED
-</div>
+    <div class="muted">
+        CHAPTER 01 // 23:17
+    </div>
 
 </header>
 
@@ -424,41 +755,47 @@ CASE 01 // UNSOLVED
 
 <aside>
 
-<button id="mOverview"
-class="menu"
-onclick="overview()">
-📁 사건 개요
-</button>
+    <button
+        id="mOverview"
+        class="menu-side"
+        onclick="overview()">
+        📁 사건 개요
+    </button>
 
-<button id="mPeople"
-class="menu"
-onclick="people()">
-👤 인물
-</button>
+    <button
+        id="mPeople"
+        class="menu-side"
+        onclick="people()">
+        👤 인물
+    </button>
 
-<button id="mEvidence"
-class="menu"
-onclick="evidence()">
-📷 증거물
-</button>
+    <button
+        id="mEvidence"
+        class="menu-side"
+        onclick="evidence()">
+        📷 증거물
+    </button>
 
-<button id="mTrain"
-class="menu"
-onclick="train()">
-🚆 열차
-</button>
+    <button
+        id="mTrain"
+        class="menu-side"
+        onclick="train()">
+        🚆 열차
+    </button>
 
-<button id="mNotes"
-class="menu"
-onclick="notes()">
-🧠 추리 노트
-</button>
+    <button
+        id="mNotes"
+        class="menu-side"
+        onclick="notes()">
+        🧠 추리 노트
+    </button>
 
-<button id="mFinal"
-class="menu"
-onclick="finalDeduction()">
-⚖ 최종 추리
-</button>
+    <button
+        id="mFinal"
+        class="menu-side"
+        onclick="finalDeduction()">
+        ⚖ 최종 추리
+    </button>
 
 </aside>
 
@@ -468,36 +805,54 @@ onclick="finalDeduction()">
 </div>
 
 
-<div id="cut" class="cut hidden">
+<!-- =========================
+     조사 컷신
+========================= -->
 
-<div class="cutin">
+<div
+    id="cut"
+    class="cut hidden">
 
-<div id="cutText" class="cuttext"></div>
+    <div class="cutin">
 
-<div id="reveal" class="reveal">
+        <div
+            id="cutText"
+            class="cuttext">
+        </div>
 
-<div class="fakeimg">
-[이미지 준비중]
-</div>
+        <div
+            id="reveal"
+            class="reveal">
 
-<div class="muted">
-새로운 증거물
-</div>
+            <div class="fakeimg">
+                [이미지 준비중]
+            </div>
 
-<h3 id="revealTitle"></h3>
+            <div class="muted">
+                새로운 증거물
+            </div>
 
-<button class="btn" onclick="closeCut()">
-확인
-</button>
+            <h3 id="revealTitle"></h3>
 
-</div>
+            <button
+                class="menu"
+                onclick="closeCut()">
+                확인
+            </button>
 
-</div>
+        </div>
+
+    </div>
 
 </div>
 
 
 <script>
+
+
+/* =========================
+   증거물 24개
+========================= */
 
 const E={
 
@@ -737,7 +1092,6 @@ others:[
 qs:[]
 },
 
-
 b:{
 name:"승객 B",
 role:"승객 / 조사 대상",
@@ -789,7 +1143,6 @@ qs:[
 ]
 },
 
-
 a:{
 name:"승객 A",
 role:"승객 / 목격자",
@@ -835,7 +1188,6 @@ qs:[
 ]
 },
 
-
 c:{
 name:"승객 C",
 role:"승객 / 목격자",
@@ -880,7 +1232,6 @@ qs:[
 
 ]
 },
-
 
 staff:{
 name:"승무원",
@@ -936,15 +1287,11 @@ let currentPerson="";
 function found(){
 
 try{
-
-return JSON.parse(
-localStorage.getItem("case01_evidence")||"[]"
-);
-
+    return JSON.parse(
+        localStorage.getItem("case01_evidence") || "[]"
+    );
 }catch{
-
-return[];
-
+    return [];
 }
 
 }
@@ -953,23 +1300,14 @@ return[];
 function setFound(a){
 
 localStorage.setItem(
-"case01_evidence",
-JSON.stringify(a)
+    "case01_evidence",
+    JSON.stringify(a)
 );
 
 }
 
 
-function show(id){
-
-document.querySelectorAll(".screen")
-.forEach(x=>x.classList.add("hidden"));
-
-document.getElementById("start")
-.classList.add("hidden");
-
-document.getElementById("app")
-.classList.remove("hidden");
+function showMenu(id){
 
 [
 "mOverview",
@@ -978,824 +1316,897 @@ document.getElementById("app")
 "mTrain",
 "mNotes",
 "mFinal"
-]
-.forEach(x=>
-document.getElementById(x).classList.remove("active")
-);
+].forEach(x=>{
+    document.getElementById(x).classList.remove("active");
+});
 
 document.getElementById(id).classList.add("active");
 
 }
 
 
+/* =========================
+   메인 / 챕터 이동
+========================= */
+
+function openChapters(){
+
+    document.getElementById("mainScreen").style.display="none";
+
+    document.getElementById("chapterScreen").style.display="flex";
+
+}
+
+
+function backToMain(){
+
+    document.getElementById("chapterScreen").style.display="none";
+
+    document.getElementById("mainScreen").style.display="flex";
+
+}
+
+
+function startChapter1(){
+
+    document.getElementById("chapterScreen").style.display="none";
+
+    document.getElementById("gameScreen").style.display="block";
+
+    overview();
+
+}
+
+
+function chapterNothing(){
+
+    // 아직 미구현
+
+}
+
+
+function caseRecords(){
+
+    alert("사건 기록 기능은 아직 준비 중입니다.");
+
+}
+
+
+function settings(){
+
+    alert("설정 기능은 아직 준비 중입니다.");
+
+}
+
+
+/* =========================
+   사건 개요
+========================= */
+
 function overview(){
 
-show("mOverview");
+    showMenu("mOverview");
 
-main.innerHTML=`
+    main.innerHTML=`
 
-<h2>사건 개요</h2>
+    <h2>사건 개요</h2>
 
-<div class="subtitle">
-CASE 01 — 마지막 객차
-</div>
+    <div class="subtitle2">
+        CHAPTER 01 — 23:17
+    </div>
 
-<div class="panel goal">
+    <div class="panel">
 
-<div class="label">
-CURRENT OBJECTIVE
-</div>
+        <div class="label">
+            CURRENT OBJECTIVE
+        </div>
 
-<div class="text">
-7호차를 조사하여 사건 당시의 상황을 파악하고,
-실종자의 행방에 대한 단서를 찾아라.
-</div>
+        <div class="text">
+            7호차를 조사하여 사건 당시의 상황을 파악하고,
+            실종자의 행방에 대한 단서를 찾아라.
+        </div>
 
-</div>
+    </div>
 
-<div class="panel text">
+    <div class="panel text">
 
-1998년 11월 17일.<br><br>
+        1998년 11월 17일.<br><br>
 
-종착역 도착 직전,
-열차 7호차에서 승객 한 명이 사라졌다.<br><br>
+        종착역 도착 직전,
+        열차 7호차에서 승객 한 명이 사라졌다.<br><br>
 
-개인 소지품 일부는 객차에 남아 있었지만
-본인은 발견되지 않았다.<br><br>
+        개인 소지품 일부는 객차에 남아 있었지만
+        본인은 발견되지 않았다.<br><br>
 
-당시 7호차에는 여러 명의 승객과
-승무원이 타고 있었다.<br><br>
+        당시 7호차에는 여러 명의 승객과
+        승무원이 타고 있었다.<br><br>
 
-누군가의 진술은 다른 기록과
-미묘하게 맞지 않는 것으로 보인다.
+        누군가의 진술은 다른 기록과
+        미묘하게 맞지 않는 것으로 보인다.
 
-</div>
+    </div>
 
-${progress()}
+    ${progress()}
 
-`;
+    `;
 
 }
 
 
 function progress(){
 
-let n=found().length;
+    let n=found().length;
 
-return `
+    return `
 
-<div class="progress panel">
+    <div class="progress panel">
 
-<div class="label">
-조사 진행도
-</div>
+        <div class="label">
+            조사 진행도
+        </div>
 
-<div class="small">
-${n} / 24
-</div>
+        <div class="small">
+            ${n} / 24
+        </div>
 
-<div class="bar">
+        <div class="bar">
 
-<div class="fill"
-style="width:${n/24*100}%">
-</div>
+            <div
+                class="fill"
+                style="width:${n/24*100}%">
+            </div>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
-`;
+    `;
 
 }
 
 
+/* =========================
+   인물
+========================= */
+
 function people(){
 
-show("mPeople");
+    showMenu("mPeople");
 
-main.innerHTML=`
+    main.innerHTML=`
 
-<h2>인물</h2>
+    <h2>인물</h2>
 
-<div class="subtitle">
-사건 관련 인물
-</div>
+    <div class="subtitle2">
+        사건 관련 인물
+    </div>
 
-<div class="grid">
+    <div class="grid">
 
-${Object.entries(P).map(([id,p],i)=>`
+        ${Object.entries(P).map(([id,p],i)=>`
 
-<div class="card"
-onclick="person('${id}')">
+        <div
+            class="card"
+            onclick="person('${id}')">
 
-<div class="small">
-PERSON 0${i+1}
-</div>
+            <div class="small">
+                PERSON 0${i+1}
+            </div>
 
-<div class="name">
-${p.name}
-</div>
+            <div class="name">
+                ${p.name}
+            </div>
 
-<div class="small">
-${p.role}
-</div>
+            <div class="small">
+                ${p.role}
+            </div>
 
-</div>
+        </div>
 
-`).join("")}
+        `).join("")}
 
-</div>
+    </div>
 
-`;
+    `;
 
 }
 
 
 function person(id){
 
-currentPerson=id;
+    currentPerson=id;
 
-let p=P[id];
+    let p=P[id];
 
-let notes=
-getPersonNotes()[id]||"";
+    let notes=getPersonNotes()[id] || "";
 
-show("mPeople");
+    showMenu("mPeople");
 
-let questionArea="";
+    let questionArea="";
 
-if(id==="alex"){
+    if(id==="alex"){
 
-questionArea=`
+        questionArea=`
 
-<div class="panel">
+        <div class="panel">
 
-<div class="label">
-마지막 확인 기록
-</div>
+            <div class="label">
+                마지막 확인 기록
+            </div>
 
-<div class="text">
-${p.last}
-</div>
+            <div class="text">
+                ${p.last}
+            </div>
 
-</div>
+        </div>
 
-<div class="panel">
+        <div class="panel">
 
-<div class="label">
-심문 기록
-</div>
+            <div class="label">
+                심문 기록
+            </div>
 
-<div class="empty">
-실종 상태인 인물입니다.<br>
-현재 직접적인 심문은 불가능합니다.
-</div>
+            <div class="empty">
+                실종 상태인 인물입니다.<br>
+                현재 직접적인 심문은 불가능합니다.
+            </div>
 
-</div>
+        </div>
 
-`;
+        `;
 
-}else{
+    }else{
 
-questionArea=`
+        questionArea=`
 
-<div class="panel">
+        <div class="panel">
 
-<div class="label">
-추가 질문
-</div>
+            <div class="label">
+                추가 질문
+            </div>
 
-<div id="questions">
+            <div id="questions">
 
-${p.qs.map(
-(q,i)=>questionHTML(q,id,i)
-).join("")}
+                ${p.qs.map(
+                    (q,i)=>questionHTML(q,id,i)
+                ).join("")}
 
-</div>
+            </div>
 
-<div id="answer"></div>
+            <div id="answer"></div>
 
-</div>
+        </div>
 
-`;
+        `;
 
-}
+    }
 
-main.innerHTML=`
+    main.innerHTML=`
 
-<div class="panel">
+    <div class="panel">
 
-<div class="small">
-${p.role}
-</div>
+        <div class="small">
+            ${p.role}
+        </div>
 
-<h2>
-${p.name}
-</h2>
+        <h2>
+            ${p.name}
+        </h2>
 
-<div class="small">
-${p.place}
-</div>
+        <div class="small">
+            ${p.place}
+        </div>
 
-</div>
+    </div>
 
-<div class="panel">
+    <div class="panel">
 
-<div class="label">
-기본 정보
-</div>
+        <div class="label">
+            기본 정보
+        </div>
 
-<div class="text">
-${p.desc}
-</div>
+        <div class="text">
+            ${p.desc}
+        </div>
 
-</div>
+    </div>
 
-<div class="panel">
+    <div class="panel">
 
-<div class="label">
-관련 기록
-</div>
+        <div class="label">
+            관련 기록
+        </div>
 
-<div class="text">
-"${p.statement}"
-</div>
+        <div class="text">
+            "${p.statement}"
+        </div>
 
-</div>
+    </div>
 
-<div class="panel">
+    <div class="panel">
 
-<div class="label">
-다른 인물의 증언
-</div>
+        <div class="label">
+            다른 인물의 증언
+        </div>
 
-${p.others.map(x=>`
+        ${p.others.map(x=>`
 
-<p class="text">
-<b>${x[0]}</b> :
-"${x[1]}"
-</p>
+        <p class="text">
+            <b>${x[0]}</b> :
+            "${x[1]}"
+        </p>
 
-`).join("")}
+        `).join("")}
 
-</div>
+    </div>
 
-${questionArea}
+    ${questionArea}
 
-<div class="panel">
+    <div class="panel">
 
-<div class="label">
-인물별 메모
-</div>
+        <div class="label">
+            인물별 메모
+        </div>
 
-<textarea
-id="pn"
-class="personnote"
-placeholder="${p.name}에 대한 메모..."
->${notes}</textarea>
+        <textarea
+            id="pn"
+            class="personnote"
+            placeholder="${p.name}에 대한 메모..."
+        >${notes}</textarea>
 
-<div class="small">
-입력할 때마다 자동 저장됩니다.
-</div>
+        <div class="small">
+            입력할 때마다 자동 저장됩니다.
+        </div>
 
-</div>
+    </div>
 
-<button class="back"
-onclick="people()">
-← 인물 목록
-</button>
+    <button
+        class="back"
+        onclick="people()">
+        ← 인물 목록
+    </button>
 
-`;
+    `;
 
 }
 
 
 function questionHTML(q,id,i){
 
-let ok=
-q[2]===0 ||
-found().includes(q[2]);
+    let ok=
+        q[2]===0 ||
+        found().includes(q[2]);
 
-return `
+    return `
 
-<button
-class="question ${ok?"":"locked"}"
-${ok
-?`onclick="answer('${id}',${i})"`
-:"disabled"}>
+    <button
+        class="question ${ok?"":"locked"}"
+        ${ok
+            ?`onclick="answer('${id}',${i})"`
+            :"disabled"}>
 
-${ok
-?q[0]
-:"🔒 "+q[0]+" — 관련 증거 필요"}
+        ${ok
+            ?q[0]
+            :"🔒 "+q[0]+" — 관련 증거 필요"}
 
-</button>
+    </button>
 
-`;
+    `;
 
 }
 
 
 function answer(id,i){
 
-let q=P[id].qs[i];
+    let q=P[id].qs[i];
 
-document.getElementById("answer")
-.innerHTML=`
+    document.getElementById("answer").innerHTML=`
 
-<div class="answer">
+    <div class="answer">
 
-<div class="label">
-ANSWER
-</div>
+        <div class="label">
+            ANSWER
+        </div>
 
-${q[1]}
+        ${q[1]}
 
-</div>
+    </div>
 
-`;
+    `;
 
 }
 
 
 function getPersonNotes(){
 
-try{
+    try{
 
-return JSON.parse(
-localStorage.getItem(
-"case01_person_notes"
-)||"{}"
-);
+        return JSON.parse(
+            localStorage.getItem(
+                "case01_person_notes"
+            ) || "{}"
+        );
 
-}catch{
+    }catch{
 
-return{};
+        return {};
 
-}
+    }
 
 }
 
 
 function savePersonNote(){
 
-let n=getPersonNotes();
+    let n=getPersonNotes();
 
-n[currentPerson]=
-document.getElementById("pn").value;
+    n[currentPerson]=
+        document.getElementById("pn").value;
 
-localStorage.setItem(
-"case01_person_notes",
-JSON.stringify(n)
-);
+    localStorage.setItem(
+        "case01_person_notes",
+        JSON.stringify(n)
+    );
 
 }
-
+  /* =========================
+   증거물
+========================= */
 
 function evidence(){
 
-show("mEvidence");
+    showMenu("mEvidence");
 
-let f=found();
+    let f=found();
 
-main.innerHTML=`
+    main.innerHTML=`
 
-<h2>증거물</h2>
+    <h2>증거물</h2>
 
-<div class="subtitle">
-확보한 단서를 확인할 수 있습니다.
-</div>
+    <div class="subtitle2">
+        확보한 단서를 확인할 수 있습니다.
+    </div>
 
-${f.length
+    ${
+        f.length
 
-?
+        ?
 
-f.sort((a,b)=>a-b).map(id=>`
+        f.sort((a,b)=>a-b).map(id=>`
 
-<div class="card evidence">
+        <div class="card evidence">
 
-<div>
+            <div>
 
-<div class="small">
-EVIDENCE
-${String(id).padStart(2,"0")}
-</div>
+                <div class="small">
+                    EVIDENCE
+                    ${String(id).padStart(2,"0")}
+                </div>
 
-<div class="name">
-${E[id][0]}
-</div>
+                <div class="name">
+                    ${E[id][0]}
+                </div>
 
-<div class="small">
-발견 위치 :
-${E[id][1]}
-</div>
+                <div class="small">
+                    발견 위치 : ${E[id][1]}
+                </div>
 
-</div>
+            </div>
 
-<button
-class="detail"
-onclick="edetail(${id})">
+            <button
+                class="detail"
+                onclick="edetail(${id})">
 
-상세보기 →
+                상세보기 →
 
-</button>
+            </button>
 
-</div>
+        </div>
 
-`).join("")
+        `).join("")
 
-:
+        :
 
-`
+        `
 
-<div class="empty">
+        <div class="empty">
 
-아직 찾은 단서가 없습니다.<br>
+            아직 찾은 단서가 없습니다.<br><br>
 
-열차를 조사하여 단서를 찾으세요.
+            열차를 조사하여 단서를 찾으세요.
 
-</div>
+        </div>
 
-`
+        `
+    }
 
-}
-
-`;
+    `;
 
 }
 
 
 function edetail(id){
 
-show("mEvidence");
+    showMenu("mEvidence");
 
-let d=E[id];
+    let d=E[id];
 
-main.innerHTML=`
+    main.innerHTML=`
 
-<div class="fakeimg">
-[이미지 준비중]
-</div>
+    <div class="fakeimg">
+        [이미지 준비중]
+    </div>
 
-<div class="small">
-EVIDENCE
-${String(id).padStart(2,"0")}
-</div>
+    <div class="small">
+        EVIDENCE
+        ${String(id).padStart(2,"0")}
+    </div>
 
-<h2>
-${d[0]}
-</h2>
+    <h2>
+        ${d[0]}
+    </h2>
 
-<div class="panel">
+    <div class="panel">
 
-<div class="label">
-발견 위치
-</div>
+        <div class="label">
+            발견 위치
+        </div>
 
-<div class="text">
-${d[1]}
-</div>
+        <div class="text">
+            ${d[1]}
+        </div>
 
-<div class="label">
-관찰 기록
-</div>
+        <br>
 
-<div class="text">
-${d[3]}
-</div>
+        <div class="label">
+            관찰 기록
+        </div>
 
-<div class="label">
-확인된 단서
-</div>
+        <div class="text">
+            ${d[3]}
+        </div>
 
-<div class="text">
-${d[4]}
-</div>
+        <br>
 
-</div>
+        <div class="label">
+            확인된 단서
+        </div>
 
-<button
-class="back"
-onclick="evidence()">
+        <div class="text">
+            ${d[4]}
+        </div>
 
-← 증거물 목록
+    </div>
 
-</button>
+    <button
+        class="back"
+        onclick="evidence()">
 
-`;
+        ← 증거물 목록
+
+    </button>
+
+    `;
 
 }
 
 
+/* =========================
+   7호차 조사
+========================= */
+
 function train(){
 
-show("mTrain");
+    showMenu("mTrain");
 
-let cards=[
+    let cards=[
 
-[
-"seat",
-"💺",
-"좌석 구역",
-"승객들이 이용하던 좌석과 테이블"
-],
+        [
+            "seat",
+            "💺",
+            "좌석 구역",
+            "승객들이 이용하던 좌석과 테이블"
+        ],
 
-[
-"door",
-"🚪",
-"출입문",
-"객차 양쪽 출입문과 주변"
-],
+        [
+            "door",
+            "🚪",
+            "출입문",
+            "객차 양쪽 출입문과 주변"
+        ],
 
-[
-"bath",
-"🚻",
-"화장실",
-"세면대와 휴지통, 내부"
-],
+        [
+            "bath",
+            "🚻",
+            "화장실",
+            "세면대와 휴지통, 내부"
+        ],
 
-[
-"luggage",
-"🧳",
-"짐칸",
-"승객들의 수하물이 보관된 곳"
-],
+        [
+            "luggage",
+            "🧳",
+            "짐칸",
+            "승객들의 수하물이 보관된 곳"
+        ],
 
-[
-"window",
-"🪟",
-"창가",
-"창문과 창가 주변"
-],
+        [
+            "window",
+            "🪟",
+            "창가",
+            "창문과 창가 주변"
+        ],
 
-[
-"connection",
-"🔗",
-"객차 연결부",
-"다른 객차로 이어지는 통로"
-]
+        [
+            "connection",
+            "🔗",
+            "객차 연결부",
+            "다른 객차로 이어지는 통로"
+        ]
 
-];
+    ];
 
-main.innerHTML=`
+    main.innerHTML=`
 
-<h2>7호차</h2>
+    <h2>7호차</h2>
 
-<div class="subtitle">
-조사할 장소를 선택하십시오.
-</div>
+    <div class="subtitle2">
+        조사할 장소를 선택하십시오.
+    </div>
 
-<div class="grid">
+    <div class="grid">
 
-${cards.map(c=>`
+        ${cards.map(c=>`
 
-<div class="card">
+        <div class="card">
 
-<div style="font-size:24px">
-${c[1]}
-</div>
+            <div style="font-size:24px">
+                ${c[1]}
+            </div>
 
-<div class="name">
-${c[2]}
-</div>
+            <div class="name">
+                ${c[2]}
+            </div>
 
-<div class="small">
-${c[3]}
-</div>
+            <div class="small">
+                ${c[3]}
+            </div>
 
-<button
-class="detail"
-style="margin-top:16px"
-onclick="investigate('${c[0]}')">
+            <button
+                class="detail"
+                style="margin-top:16px"
+                onclick="investigate('${c[0]}')">
 
-조사
+                조사
 
-</button>
+            </button>
 
-</div>
+        </div>
 
-`).join("")}
+        `).join("")}
 
-</div>
+    </div>
 
-`;
+    `;
 
 }
 
 
 function investigate(l){
 
-let a=loc[l];
+    let a=loc[l];
 
-let f=found();
+    let f=found();
 
-let id=a.find(
-x=>!f.includes(x)
-);
+    let id=a.find(
+        x=>!f.includes(x)
+    );
 
-if(!id){
+    if(!id){
 
-cutOpen(
-"주변을 자세히 살펴봤지만, 특별한 것은 발견되지 않았다.",
-null
-);
+        cutOpen(
+            "주변을 자세히 살펴봤지만, 특별한 것은 발견되지 않았다.",
+            null
+        );
 
-return;
+        return;
 
-}
+    }
 
-let d=E[id];
+    let d=E[id];
 
-cutOpen(d[2],id);
+    cutOpen(d[2],id);
 
 }
 
 
 function cutOpen(text,id){
 
-document.getElementById("cut")
-.classList.remove("hidden");
+    document.getElementById("cut")
+        .classList.remove("hidden");
 
-document.getElementById("cutText")
-.style.display="grid";
+    document.getElementById("cutText")
+        .style.display="grid";
 
-document.getElementById("cutText")
-.textContent=text;
+    document.getElementById("cutText")
+        .textContent=text;
 
-document.getElementById("reveal")
-.style.display="none";
+    document.getElementById("reveal")
+        .style.display="none";
 
-if(id){
+    if(id){
 
-setTimeout(()=>{
+        setTimeout(()=>{
 
-document.getElementById("cutText")
-.style.display="none";
+            document.getElementById("cutText")
+                .style.display="none";
 
-document.getElementById("reveal")
-.style.display="block";
+            document.getElementById("reveal")
+                .style.display="block";
 
-document.getElementById("revealTitle")
-.textContent=
-`증거물 ${String(id).padStart(2,"0")} — ${E[id][0]}`;
+            document.getElementById("revealTitle")
+                .textContent=
+                `증거물 ${String(id).padStart(2,"0")} — ${E[id][0]}`;
 
-let f=found();
+            let f=found();
 
-if(!f.includes(id)){
-f.push(id);
-}
+            if(!f.includes(id)){
+                f.push(id);
+            }
 
-setFound(f);
+            setFound(f);
 
-},1500);
+        },1500);
 
-}else{
+    }else{
 
-setTimeout(
-closeCut,
-1500
-);
+        setTimeout(
+            closeCut,
+            1500
+        );
 
-}
+    }
 
 }
 
 
 function closeCut(){
 
-document.getElementById("cut")
-.classList.add("hidden");
+    document.getElementById("cut")
+        .classList.add("hidden");
 
-document.getElementById("reveal")
-.style.display="none";
+    document.getElementById("reveal")
+        .style.display="none";
 
-document.getElementById("cutText")
-.style.display="grid";
+    document.getElementById("cutText")
+        .style.display="grid";
 
-updateCurrent();
+    updateCurrent();
 
 }
 
 
 function updateCurrent(){
 
-let id=
+    if(
+        document
+        .getElementById("mEvidence")
+        .classList.contains("active")
+    ){
 
-document.getElementById("mEvidence")
-.classList.contains("active")
+        evidence();
 
-?"evidence"
+    }else if(
+        document
+        .getElementById("mTrain")
+        .classList.contains("active")
+    ){
 
-:
+        train();
 
-document.getElementById("mTrain")
-.classList.contains("active")
+    }else{
 
-?"train"
+        overview();
 
-:
-
-"overview";
-
-if(id==="evidence"){
-
-evidence();
-
-}else if(id==="train"){
-
-train();
-
-}else{
-
-overview();
+    }
 
 }
 
-}
-  function notes(){
 
-show("mNotes");
+/* =========================
+   추리 노트
+========================= */
 
-main.innerHTML=`
+function notes(){
 
-<h2>추리 노트</h2>
+    showMenu("mNotes");
 
-<div class="subtitle">
-사건에 대한 생각을 자유롭게 기록하십시오.
-</div>
+    main.innerHTML=`
 
-<textarea
-id="notes"
-class="notes"
-placeholder="여기에 자유롭게 기록하십시오..."
->${localStorage.getItem("case01_notes")||""}</textarea>
+    <h2>추리 노트</h2>
 
-<div class="small" id="ns">
-자동 저장됨
-</div>
+    <div class="subtitle2">
+        사건에 대한 생각을 자유롭게 기록하십시오.
+    </div>
 
-<button
-class="back"
-onclick="clearNotes()">
+    <textarea
+        id="notes"
+        class="notes"
+        placeholder="여기에 자유롭게 기록하십시오..."
+    >${localStorage.getItem("case01_notes")||""}</textarea>
 
-전체 삭제
+    <div
+        class="small"
+        id="ns">
+        자동 저장됨
+    </div>
 
-</button>
+    <button
+        class="back"
+        onclick="clearNotes()">
 
-<div style="text-align:right;margin-top:20px">
+        전체 삭제
 
-<button
-class="detail"
-onclick="resetCase()">
+    </button>
 
-⚠ 사건 진행 초기화
+    <div style="text-align:right;margin-top:20px">
 
-</button>
+        <button
+            class="detail"
+            onclick="resetCase()">
 
-</div>
+            ⚠ 사건 진행 초기화
 
-`;
+        </button>
+
+    </div>
+
+    `;
 
 }
 
 
 function clearNotes(){
 
-if(confirm(
-"추리 노트를 전부 삭제할까요?"
-)){
+    if(confirm(
+        "추리 노트를 전부 삭제할까요?"
+    )){
 
-localStorage.removeItem(
-"case01_notes"
-);
+        localStorage.removeItem(
+            "case01_notes"
+        );
 
-notes();
+        notes();
+
+    }
 
 }
 
-}
 
+/* =========================
+   초기화
+========================= */
 
 function resetCase(){
 
-if(confirm(
-"획득한 증거, 추리 노트, 인물별 메모를 모두 초기화할까요?"
-)){
+    if(confirm(
+        "획득한 증거, 추리 노트, 인물별 메모를 모두 초기화할까요?"
+    )){
 
-localStorage.removeItem(
-"case01_evidence"
-);
+        localStorage.removeItem(
+            "case01_evidence"
+        );
 
-localStorage.removeItem(
-"case01_notes"
-);
+        localStorage.removeItem(
+            "case01_notes"
+        );
 
-localStorage.removeItem(
-"case01_person_notes"
-);
+        localStorage.removeItem(
+            "case01_person_notes"
+        );
 
-location.reload();
+        location.reload();
 
-}
+    }
 
 }
 
@@ -1806,338 +2217,362 @@ location.reload();
 
 function finalDeduction(){
 
-show("mFinal");
+    showMenu("mFinal");
 
-let f=found();
+    let f=found();
 
-main.innerHTML=`
+    main.innerHTML=`
 
-<h2>최종 추리</h2>
+    <h2>최종 추리</h2>
 
-<div class="subtitle">
-지금까지 확보한 정보를 바탕으로 사건을 판단하십시오.
-</div>
-
-<div class="finalbox">
-
-<div class="label">
-STEP 01 — 인물 지목
-</div>
-
-<div class="text">
-이 사건에서 알렉스를 데려간 인물은 누구라고 생각합니까?
-</div>
-
-<select id="suspect" class="select">
-
-<option value="">
-선택하십시오
-</option>
-
-<option value="a">
-승객 A
-</option>
-
-<option value="b">
-승객 B
-</option>
-
-<option value="c">
-승객 C
-</option>
-
-<option value="staff">
-승무원
-</option>
-
-</select>
-
-</div>
+    <div class="subtitle2">
+        지금까지 확보한 정보를 바탕으로 사건을 판단하십시오.
+    </div>
 
 
-<div class="finalbox">
+    <div class="finalbox">
 
-<div class="label">
-STEP 02 — 사건의 이동 경로
-</div>
+        <div class="label">
+            STEP 01 — 인물 지목
+        </div>
 
-<div class="text">
-알렉스는 어떤 경로로 사라졌다고 생각합니까?
-</div>
+        <div class="text">
+            이 사건에서 알렉스를 데려간 인물은 누구라고 생각합니까?
+        </div>
 
-<select id="route" class="select">
+        <select
+            id="suspect"
+            class="select">
 
-<option value="">
-선택하십시오
-</option>
+            <option value="">
+                선택하십시오
+            </option>
 
-<option value="seat">
-좌석 주변에서 다른 장소로 이동
-</option>
+            <option value="a">
+                승객 A
+            </option>
 
-<option value="bath">
-화장실 방향으로 이동
-</option>
+            <option value="b">
+                승객 B
+            </option>
 
-<option value="connection">
-객차 연결부를 통해 이동
-</option>
+            <option value="c">
+                승객 C
+            </option>
 
-<option value="unknown">
-현재로서는 알 수 없음
-</option>
+            <option value="staff">
+                승무원
+            </option>
 
-</select>
+        </select>
 
-</div>
-
-
-<div class="finalbox">
-
-<div class="label">
-STEP 03 — 가장 중요한 근거
-</div>
-
-<div class="text">
-현재 발견한 증거 중 하나를 선택하십시오.
-</div>
-
-<select id="proof" class="select">
-
-<option value="">
-선택하십시오
-</option>
-
-${f.sort((a,b)=>a-b).map(id=>`
-
-<option value="${id}">
-증거물 ${String(id).padStart(2,"0")} — ${E[id][0]}
-</option>
-
-`).join("")}
-
-</select>
-
-</div>
+    </div>
 
 
-<div class="panel">
+    <div class="finalbox">
 
-<div class="text">
+        <div class="label">
+            STEP 02 — 사건의 이동 경로
+        </div>
 
-현재 확보한 증거 :
-<b>${f.length} / 24</b>
+        <div class="text">
+            알렉스는 어떤 경로로 사라졌다고 생각합니까?
+        </div>
 
-<br><br>
+        <select
+            id="route"
+            class="select">
 
-※ 모든 증거를 확보하지 않아도 최종 추리는 가능합니다.
+            <option value="">
+                선택하십시오
+            </option>
 
-</div>
+            <option value="seat">
+                좌석 주변에서 다른 장소로 이동
+            </option>
 
-</div>
+            <option value="bath">
+                화장실 방향으로 이동
+            </option>
+
+            <option value="connection">
+                객차 연결부를 통해 이동
+            </option>
+
+            <option value="unknown">
+                아직 알 수 없음
+            </option>
+
+        </select>
+
+    </div>
 
 
-<button class="btn"
-onclick="submitDeduction()">
+    <div class="finalbox">
 
-최종 추리 제출
+        <div class="label">
+            STEP 03 — 가장 중요한 근거
+        </div>
 
-</button>
+        <div class="text">
+            현재 발견한 증거 중 하나를 선택하십시오.
+        </div>
 
-<div id="finalResult"></div>
+        <select
+            id="proof"
+            class="select">
 
-`;
+            <option value="">
+                선택하십시오
+            </option>
+
+            ${f.sort((a,b)=>a-b).map(id=>`
+
+                <option value="${id}">
+                    증거물 ${String(id).padStart(2,"0")} — ${E[id][0]}
+                </option>
+
+            `).join("")}
+
+        </select>
+
+    </div>
+
+
+    <div class="panel">
+
+        <div class="text">
+
+            현재 확보한 증거 :
+            <b>${f.length} / 24</b>
+
+            <br><br>
+
+            ※ 모든 증거를 확보하지 않아도
+            최종 추리는 가능합니다.
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="menu"
+        onclick="submitDeduction()">
+
+        최종 추리 제출
+
+    </button>
+
+
+    <div id="finalResult"></div>
+
+    `;
 
 }
 
 
 function submitDeduction(){
 
-let suspect=
-document.getElementById("suspect").value;
+    let suspect=
+        document.getElementById("suspect").value;
 
-let route=
-document.getElementById("route").value;
+    let route=
+        document.getElementById("route").value;
 
-let proof=
-document.getElementById("proof").value;
+    let proof=
+        document.getElementById("proof").value;
 
-if(!suspect || !route || !proof){
+    if(
+        !suspect ||
+        !route ||
+        !proof
+    ){
 
-alert(
-"모든 항목을 선택해야 합니다."
-);
+        alert(
+            "모든 항목을 선택해야 합니다."
+        );
 
-return;
+        return;
+
+    }
+
+
+    /*
+        CHAPTER 01 TRUE END
+
+        범인/책임자 : B
+        이동 경로 : 객차 연결부
+        결정적 증거 : 24
+
+        이후 스토리가 완성되면
+        이 판정 부분을 더 정교하게 확장.
+    */
+
+    let correctSuspect=
+        suspect==="b";
+
+    let correctRoute=
+        route==="connection";
+
+    let correctProof=
+        proof==="24";
+
+
+    let result=
+        document.getElementById("finalResult");
+
+
+    if(
+        correctSuspect &&
+        correctRoute &&
+        correctProof
+    ){
+
+        result.innerHTML=`
+
+        <div class="result">
+
+            <h2>
+                TRUE END
+            </h2>
+
+            <div class="text">
+
+                당신은 사건의 핵심을 정확하게 짚어냈다.<br><br>
+
+                알렉스는 스스로 사라진 것이 아니었다.
+                누군가의 도움을 받아 7호차에서 이동했고,
+                그 과정에서 객차 연결부를 이용했다.<br><br>
+
+                지금까지 발견된 시간 기록과 이동 흔적,
+                그리고 인물들의 진술을 종합하면
+                하나의 결론에 도달할 수 있다.
+
+                <br><br>
+
+                <span class="muted">
+                    CASE 01 — SOLVED
+                </span>
+
+            </div>
+
+        </div>
+
+        `;
+
+    }else{
+
+        let reason="";
+
+        if(!correctSuspect){
+
+            reason+=
+            "지목한 인물이 사건의 실제 책임자와 일치하지 않는다.<br>";
+
+        }
+
+        if(!correctRoute){
+
+            reason+=
+            "알렉스의 이동 경로에 대한 판단이 정확하지 않다.<br>";
+
+        }
+
+        if(!correctProof){
+
+            reason+=
+            "선택한 증거는 사건을 결정적으로 설명하기에 부족하다.<br>";
+
+        }
+
+
+        result.innerHTML=`
+
+        <div class="result">
+
+            <h2>
+                BAD END
+            </h2>
+
+            <div class="text">
+
+                당신의 추리는 사건의 전체 흐름을
+                설명하지 못했다.<br><br>
+
+                ${reason}
+
+                <br>
+
+                일부 단서는 맞았을 수도 있지만,
+                결정적인 부분에서 판단이 어긋났다.
+
+                <br><br>
+
+                <span class="muted">
+                    CASE 01 — UNSOLVED
+                </span>
+
+            </div>
+
+        </div>
+
+        `;
+
+    }
 
 }
 
 
-/*
-TRUE END의 기본 정답.
-
-B가 알렉스를 데려갔다.
-객차 연결부를 이용했다.
-
-결정적인 증거는 24번.
-하지만 24번만으로는 B를 확정할 수 없도록
-앞선 증거들과 진술을 함께 봐야 한다.
-*/
-
-let correctSuspect=
-suspect==="b";
-
-let correctRoute=
-route==="connection";
-
-let correctProof=
-proof==="24";
-
-
-let result=
-document.getElementById("finalResult");
-
-
-if(correctSuspect &&
-correctRoute &&
-correctProof){
-
-result.innerHTML=`
-
-<div class="result" style="margin-top:20px">
-
-<h2>
-TRUE END
-</h2>
-
-<div class="text">
-
-당신은 사건의 핵심을 정확하게 짚어냈다.<br><br>
-
-알렉스는 스스로 사라진 것이 아니었다.
-누군가의 도움을 받아 7호차에서 이동했고,
-그 과정에서 객차 연결부를 이용했다.<br><br>
-
-당신의 선택은 사건 당시의 시간과 이동 흔적,
-그리고 여러 인물의 진술을 종합했을 때
-가장 일관된 결론과 일치한다.
-
-<br><br>
-
-<span class="muted">
-CASE 01 — SOLVED
-</span>
-
-</div>
-
-</div>
-
-`;
-
-}else{
-
-let reason="";
-
-if(!correctSuspect){
-
-reason+="지목한 인물이 사건의 실제 책임자와 일치하지 않는다.<br>";
-
-}
-
-if(!correctRoute){
-
-reason+="알렉스의 이동 경로에 대한 판단이 정확하지 않다.<br>";
-
-}
-
-if(!correctProof){
-
-reason+="선택한 증거는 사건을 결정적으로 설명하기에 부족하다.<br>";
-
-}
-
-result.innerHTML=`
-
-<div class="result" style="margin-top:20px">
-
-<h2>
-BAD END
-</h2>
-
-<div class="text">
-
-당신의 추리는 사건의 전체 흐름을 설명하지 못했다.<br><br>
-
-${reason}
-
-<br>
-
-일부 단서는 맞았을 수도 있지만,
-결정적인 부분에서 판단이 어긋났다.
-
-<br><br>
-
-<span class="muted">
-CASE 01 — UNSOLVED
-</span>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-}
-
+/* =========================
+   자동 저장
+========================= */
 
 document.addEventListener(
-"input",
-e=>{
+    "input",
+    e=>{
 
-if(e.target.id==="notes"){
+        if(e.target.id==="notes"){
 
-localStorage.setItem(
-"case01_notes",
-e.target.value
-);
+            localStorage.setItem(
+                "case01_notes",
+                e.target.value
+            );
 
-let n=document.getElementById("ns");
+            let n=
+                document.getElementById("ns");
 
-if(n){
-n.textContent="저장됨";
-}
+            if(n){
+                n.textContent="저장됨";
+            }
 
-}
+        }
 
-if(e.target.id==="pn"){
 
-savePersonNote();
+        if(e.target.id==="pn"){
 
-}
+            savePersonNote();
 
-}
+        }
+
+    }
 );
 
 
 /* =========================
-   페이지 시작
+   시작 상태
 ========================= */
 
-function startApp(){
+document.getElementById("mainScreen")
+    .style.display="flex";
 
-document.getElementById("start")
-.classList.add("hidden");
+document.getElementById("chapterScreen")
+    .style.display="none";
 
-document.getElementById("app")
-.classList.remove("hidden");
-
-overview();
-
-}
+document.getElementById("gameScreen")
+    .style.display="none";
 
 </script>
 
 </body>
-</html> 
+</html>
